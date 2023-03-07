@@ -17,14 +17,14 @@ public class CameraCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    //Robot.getRobotContainer().getDriveTrain().changeToSpeed();
-    Robot.getRobotContainer().getCamera();
+    //Robot.getRobotContainer().getCamera().startCamera2();
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
+   // Robot.getRobotContainer().getCamera().startCamera();
   }
 
   // Called once the command ends or is interrupted.

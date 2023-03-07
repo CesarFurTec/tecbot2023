@@ -40,6 +40,14 @@ import frc.robot.subsystems.Camera;
 import frc.robot.subsystems.driveTrain;
 import frc.robot.RobotContainer;
 
+import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
+
+import edu.wpi.first.cscore.CvSink;
+import edu.wpi.first.cscore.CvSource;
+import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
+
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -61,7 +69,33 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     robotcontainer = new RobotContainer();
     robotcontainer.configureButtonBindings();
-    cameraRetake();
+    //cameraRetake();
+    CameraServer.startAutomaticCapture();
+
+
+    ///////////////////////////////////////////////////////////////////////////
+    /*new Thread(() -> {
+      //UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+      UsbCamera camera = CameraServer.startAutomaticCapture();
+      camera.setResolution(640, 480);
+
+      //CvSink cvSink = CameraServer.getInstance().getVideo();
+      CvSink cvSink = CameraServer.getVideo();
+      
+      //CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
+
+      CvSource outputStream = CameraServer.putVideo("Blur", 640, 480);
+
+      Mat source = new Mat();
+      Mat output = new Mat();
+
+      while(!Thread.interrupted()) {
+          cvSink.grabFrame(source);
+          Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
+          outputStream.putFrame(output);
+      }
+  }).start(); */
+  ///////////////////////////////////////
    
   }
   public static RobotContainer getRobotContainer() {
@@ -165,6 +199,7 @@ public class Robot extends TimedRobot {
 
   public static void driveRetake()
   {
+    cameraRetake();
     driveRobot t2 = new driveRobot();
     
     //Camera camera = new Camera();

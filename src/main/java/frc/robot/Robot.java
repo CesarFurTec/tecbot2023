@@ -46,7 +46,9 @@ import org.opencv.imgproc.Imgproc;
 import edu.wpi.first.cscore.CvSink;
 import edu.wpi.first.cscore.CvSource;
 import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.MjpegServer;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -69,8 +71,8 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     robotcontainer = new RobotContainer();
     robotcontainer.configureButtonBindings();
-    //cameraRetake();
-    CameraServer.startAutomaticCapture();
+    cameraRetake();
+    //CameraServer.startAutomaticCapture();
 
 
     ///////////////////////////////////////////////////////////////////////////
@@ -193,13 +195,34 @@ public class Robot extends TimedRobot {
 
   public static void cameraRetake()
   {
-    CameraCommand cc1 = new CameraCommand();
-    cc1.schedule();
+    new Thread(() -> {
+      //UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+      UsbCamera camera = CameraServer.startAutomaticCapture();
+      camera.setResolution(320, 240);
+      camera.setWhiteBalanceAuto();
+      camera.setFPS(15);
+
+      //CvSink cvSink = CameraServer.getInstance().getVideo();
+      CvSink cvSink = CameraServer.getVideo();
+      
+      //CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
+
+      CvSource outputStream = CameraServer.putVideo("Blur", 320, 240);
+
+      Mat source = new Mat();
+      Mat output = new Mat();
+
+      while(!Thread.interrupted()) {
+          cvSink.grabFrame(source);
+          Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
+          outputStream.putFrame(output);
+      }
+  }).start(); 
   }
 
   public static void driveRetake()
   {
-    cameraRetake();
+    //cameraRetake();
     driveRobot t2 = new driveRobot();
     
     //Camera camera = new Camera();

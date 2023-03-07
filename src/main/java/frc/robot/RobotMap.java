@@ -48,6 +48,6 @@ public static final int SolenoidPortExtentionArm[] = {PCM_1_PORT, 3, 12};
 
 public static final int kGyroPort = 0;
 
-public static final double encoderTolerance = 0.121;
+public static final double encoderTolerance = 0.12;
 }
 

@@ -95,7 +95,7 @@ public class driveTrain extends SubsystemBase {
    m4.set(outputSpeed); 
   }
 
-  public void driveWithEncoders(double newSetPoint){
+  public void driveWithEncoders(double newSetPoint,int dir){
     System.out.println("drivewencoders" + newSetPoint);
     double sensorPosition =  -1 * driveTrainEncoderL1.getPosition() * TecbotConstants.kDriveTick2Feet;
   
@@ -103,17 +103,17 @@ public class driveTrain extends SubsystemBase {
   
     System.out.println("distance: " + newSetPoint);
   
-    double outputSpeed = TecbotConstants.kP*error/newSetPoint;
+    double outputSpeed = TecbotConstants.kP*error/(newSetPoint + 0.0001);
   
     SmartDashboard.putNumber("Drivetrain distance: ", sensorPosition);
     SmartDashboard.putNumber("setpoint: ",newSetPoint);
     SmartDashboard.putNumber("error: ", error);
     SmartDashboard.putNumber("output speed: ", outputSpeed);
      
-     m1.set(-outputSpeed);
-     m2.set(-outputSpeed); 
-     m3.set(outputSpeed);
-     m4.set(outputSpeed); 
+     m1.set(-outputSpeed*dir);
+     m2.set(-outputSpeed*dir); 
+     m3.set(outputSpeed*dir);
+     m4.set(outputSpeed*dir); 
     }
 
   public void driveForwardWithEncodersShort(){
@@ -161,7 +161,7 @@ public class driveTrain extends SubsystemBase {
   public void driveBackwards(){
     double sensorPositionBackWards = driveTrainEncoderL1.getPosition() * TecbotConstants.kDriveTick2Feet;
 
-    double error = TecbotConstants.setpointBakcwards - sensorPositionBackWards;
+    double error = TecbotConstants.setpointBakcwards - sensorPositionBackWards; //maybe Math.abs
 
     double outputSpeedBackwards = TecbotConstants.kP*error/TecbotConstants.setpointBakcwards;
 
@@ -270,6 +270,17 @@ public class driveTrain extends SubsystemBase {
     m4.getCANSparkMax().setIdleMode(IdleMode.kCoast);
   }
 
+  public void switchTransmission(Boolean transType)
+  {
+    if(transType == true)
+    {
+      changeToTorque();
+    }else
+    {
+      changeToSpeed();
+    }
+  }
+
   public double getAngle(){
   System.out.println(gyro.getAngle());
   SmartDashboard.putNumber("Angle: ", gyro.getAngle());
@@ -277,10 +288,10 @@ public class driveTrain extends SubsystemBase {
   }
 
   public void driveBackwardsTime(){
-m1.set(RobotMap.chassisSpeedL);
-m2.set(RobotMap.chassisSpeedL);
-m3.set(-RobotMap.chassisSpeedR);
-m4.set(-RobotMap.chassisSpeedR); 
+    m1.set(RobotMap.chassisSpeedL);
+    m2.set(RobotMap.chassisSpeedL);
+    m3.set(-RobotMap.chassisSpeedR);
+    m4.set(-RobotMap.chassisSpeedR); 
   }
 
   public void balanceL (double initEncoderL, double initEncoderR)

@@ -9,11 +9,17 @@ import frc.robot.Robot;
 
 public class DriveDistance extends CommandBase {
   double distance, threshold;
+  int direction;
   boolean finished;
   /** Creates a new DriveDistance. */
-  public DriveDistance(double d, double t) {
+  public DriveDistance(double d, double t, int dir) {
+    addRequirements(Robot.getRobotContainer().getDriveTrain());
      distance = d;
      threshold = t;
+     direction = dir;
+
+      //Poner t como signo y que double t sea 1 o -1 para que actualDistance se pueda utilizar tanto al ir para enfrente como para atrás 
+
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -28,14 +34,15 @@ public class DriveDistance extends CommandBase {
   public void execute() {
     double actualDistance = distance - Robot.getRobotContainer().getDriveTrain().getDriveTrainFeet();
 
-    Robot.getRobotContainer().getDriveTrain().driveWithEncoders(distance);
+    Robot.getRobotContainer().getDriveTrain().driveWithEncoders(distance, direction);
     System.out.println("drivedistance : " + actualDistance + "  " + threshold);
 
-    if(actualDistance < threshold)
-    {
-      System.out.println("finished");
-      finished = true;
-    }
+      if(Math.abs( actualDistance ) < (threshold) )
+       {
+        System.out.println("finished >");
+        finished = true;
+      }
+    
   }
 
   // Called once the command ends or is interrupted.

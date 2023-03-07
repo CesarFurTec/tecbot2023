@@ -18,11 +18,15 @@ public class ChangeToSpeed extends CommandBase {
   @Override
   public void initialize() {
     Robot.getRobotContainer().getDriveTrain().changeToSpeed();
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    Robot.getRobotContainer().getDriveTrain().drive(Robot.getRobotContainer().getOI().getPilot().getLeftAxisX(true), Robot.getRobotContainer().getOI().getPilot().getLeftAxisY(true));
+    Robot.driveRetake();
+  }
 
   // Called once the command ends or is interrupted.
   @Override

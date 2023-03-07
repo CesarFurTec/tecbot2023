@@ -43,18 +43,18 @@ public class OI {
       Regina.whenPressed(TecbotController.ButtonType.X, new ChangeToSpeed());
       Regina.whenPressed(TecbotController.ButtonType.Y, new ChangeToTorque());
 */
-     Regina.whenPressed(TecbotController.ButtonType.A, new IntakeOn());
-      Regina.whenPressed(TecbotController.ButtonType.B, new IntakeOff());
-      Regina.whenPressed(TecbotController.ButtonType.X, new ExtendArm());
-      Regina.whenPressed(TecbotController.ButtonType.Y, new RetractArm());
+     Regina.whenPressed(TecbotController.ButtonType.A, new IntakeOn());   //este abre
+      Regina.whenPressed(TecbotController.ButtonType.B, new IntakeOff());   // este cierra
+      Regina.whenPressed(TecbotController.ButtonType.X, new ExtendArm());   //extiende
+      Regina.whenPressed(TecbotController.ButtonType.Y, new RetractArm());  // retrae
 
-      Regina.whenPressed(TecbotController.ButtonType.LB, new ChangeToSpeed());
-      Regina.whenPressed(TecbotController.ButtonType.RB, new ChangeToTorque());
+      Regina.whenPressed(TecbotController.ButtonType.LB, new ChangeToSpeed()); //Left Bumper
+      Regina.whenPressed(TecbotController.ButtonType.RB, new ChangeToTorque()); //Right bumper
       
       
 
-      Mario.whenPressed(TecbotController.ButtonType.A, new OnArmT()); // x
-      Mario.whenPressed(TecbotController.ButtonType.B, new OffArm()); // o
+      Mario.whenPressed(TecbotController.ButtonType.A, new OnArmT()); // x   ////  este baja
+      Mario.whenPressed(TecbotController.ButtonType.B, new OffArm()); // o   //// este sube
      // Mario.whileHeld(TecbotController.ButtonType.X, new ChangeToSpeed()); // []
      // Mario.whileHeld(TecbotController.ButtonType.Y, new ChangeToTorque()); // A
    }

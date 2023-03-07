@@ -29,7 +29,9 @@ import frc.robot.commands.TurnLeftDTE;
 import frc.robot.commands.autonomusCommandGroup;
 import frc.robot.commands.driveForwardDT;
 import frc.robot.commands.driveRobot;
+import frc.robot.commands.AutoArm;
 import frc.robot.commands.onMotors;
+import frc.robot.commands.EncoderReader;
 import frc.robot.commands.turnLeftDriveTrain;
 import frc.robot.resources.Navx;
 import frc.robot.subsystems.driveTrain;
@@ -76,6 +78,7 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("angle", Navx.getGyro());
+    
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -105,16 +108,29 @@ public class Robot extends TimedRobot {
     OnArm a10 = new OnArm();
     ArmEncoder a11 = new ArmEncoder();
     EncoderArmBackwards a12 = new EncoderArmBackwards();
+
+    AutoArm aa= new AutoArm();
     
     ResetEncoderDt a13 = new ResetEncoderDt();
     TurnLeftDTE a14 = new TurnLeftDTE();
     AutonomousSequence1 a15 = new AutonomousSequence1();*/
 
+
+
    // onMotors xd = new onMotors();
-   AutoMonterrey01 auto_mty = new AutoMonterrey01();
-   System.out.println(" auto_mty");
+
+    /*AutoMonterrey01 auto_mty = new AutoMonterrey01();
+    System.out.println(" auto_mty");
     
-    auto_mty.schedule();
+      auto_mty.schedule();
+      */
+
+
+    AutoArm aa= new AutoArm();
+    System.out.println("autoArm_on");
+
+      aa.schedule();
+      
 
    /* if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
@@ -133,6 +149,11 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+    driveRetake();
+  }
+
+  public static void driveRetake()
+  {
     driveRobot t2 = new driveRobot();
    
 
@@ -142,9 +163,11 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-
+    /*EncoderReader encoder_reader = new EncoderReader();
+    encoder_reader.schedule();*/
 
   }
+  
 
   @Override
   public void testInit() {

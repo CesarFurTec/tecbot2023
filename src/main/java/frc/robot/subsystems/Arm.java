@@ -28,7 +28,7 @@ public class Arm extends SubsystemBase {
 
   private RelativeEncoder armEncoder;
 
-  DoubleSolenoid arm, extention;
+  DoubleSolenoid arm, extention, retract;
 
 
   public Arm() {
@@ -43,6 +43,7 @@ public class Arm extends SubsystemBase {
     
    arm = RobotConfigurator.buildDoubleSolenoid(RobotMap.SolenoidPortArm);
    extention = RobotConfigurator.buildDoubleSolenoid(RobotMap.SolenoidPortExtentionArm);
+   //retract = RobotConfigurator.buildDoubleSolenoid(RobotMap.SolenoidPortExtentionArm);
   } 
 
 

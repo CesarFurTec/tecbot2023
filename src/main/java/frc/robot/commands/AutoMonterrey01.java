@@ -18,11 +18,20 @@ public class AutoMonterrey01 extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     System.out.println("viva monterrey ajua");
     addCommands(
+    new TransmissionChange(true),
+    new WaitCommand(1.0),
+   // new ReturnRobot(),
     new ResetEncoderDt(),
-    new WaitCommand(1.7),
-    new DriveDistance(8,0.2), 
-    new WaitCommand(1.7),
-    new DriveDistance(0,0.2), 
-    new WaitCommand(1.7));
+    new WaitCommand(1.0),
+    new DriveDistance(8,0.5,1), 
+    new WaitCommand(1.0),
+    new ResetEncoderDt(),
+    new WaitCommand(1.0),
+    new DriveDistance(-8,0.5,1), 
+    new WaitCommand(1.0),
+    new OffMotors()
+   // new WaitCommand(0.5),
+    //new ReturnRobot()
+    );
   }
 }

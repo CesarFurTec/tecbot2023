@@ -34,8 +34,8 @@ public class AutoArm extends SequentialCommandGroup {
       new WaitCommand(1.5),
       new OnArmT(),
       new WaitCommand(1.5),
-     // new OutSafe().withTimeout(1.5),
-     // new WaitCommand(1.5)
+      new OutSafe().withTimeout(3.0),
+      new WaitCommand(1.5)
       //new DriveDistance(3,0.5,1), 
       //new WaitCommand(1.5),
       //new DriveDistance(-3,0.5,1), 

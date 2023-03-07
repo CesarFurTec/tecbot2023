@@ -11,31 +11,28 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.driveTrain;
 
 
-
 public class onMotors extends CommandBase {
-  Timer t1;
-
+  boolean finished = false;
   /** Creates a new onMotors. */
   public onMotors() {
     // Use addRequirements() here to declare subsystem dependencies.
-    t1 = new Timer();
     addRequirements(Robot.getRobotContainer().getDriveTrain());
+  
     }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    t1.start();
-    Robot.getRobotContainer().getDriveTrain().driveForward();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    Robot.getRobotContainer().getDriveTrain().driveForwardWithEncoders();
 
-
-   
- 
+    if(Robot.getRobotContainer().getDriveTrain().getEncoder()>=8){
+      finished = true;
+    }
   }
 
 
@@ -46,6 +43,6 @@ public class onMotors extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return finished;
   }
 }

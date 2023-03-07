@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.OnArmWithEncoders;
 import frc.robot.commands.autonomusCommandGroup;
 import frc.robot.commands.onMotors;
 import frc.robot.commands.turnLeftDriveTrain;
@@ -37,9 +38,9 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
      drivetrain = new driveTrain();
-     oi = new OI();
      intake = new Intake();
      arm = new Arm();
+  
      //configureButtonBindings();
   }
 
@@ -49,8 +50,8 @@ public class RobotContainer {
 
   }
 
-  public OI getOI(){
-    return oi;
+  public static OI getOI(){
+    return OI.getInstance();
   }
 
   public Intake getIntake(){
@@ -62,8 +63,8 @@ public class RobotContainer {
   }
   
 
-  private void configureButtonBindings() {
-    oi.configureButtonBindings();
+  public void configureButtonBindings() {
+    OI.getInstance().configureButtonBindings();
   }
 
 
@@ -72,8 +73,7 @@ public class RobotContainer {
     return m_autoCommand;
   }
 
-
-
+ 
   
 
 }

@@ -9,10 +9,22 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.ArmEncoder;
 import frc.robot.commands.AutomousGoAndReturn;
+import frc.robot.commands.AutonomousRoute;
+import frc.robot.commands.AutonomousSequence1;
+import frc.robot.commands.EncoderArmBackwards;
+import frc.robot.commands.GetArmAngleL;
 import frc.robot.commands.GoUpChargedStation;
+import frc.robot.commands.IntakeOff;
+import frc.robot.commands.IntakeOn;
 import frc.robot.commands.MoveArm;
 import frc.robot.commands.OnArm;
+import frc.robot.commands.OpenAndCloseClaw;
+import frc.robot.commands.ResetEncoder;
+import frc.robot.commands.ResetEncoderDt;
+import frc.robot.commands.ReturnRobot;
+import frc.robot.commands.TurnLeftDTE;
 import frc.robot.commands.autonomusCommandGroup;
 import frc.robot.commands.driveForwardDT;
 import frc.robot.commands.driveRobot;
@@ -41,6 +53,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     robotcontainer = new RobotContainer();
+    robotcontainer.configureButtonBindings();
    
   }
   public static RobotContainer getRobotContainer() {
@@ -82,24 +95,33 @@ public class Robot extends TimedRobot {
     AutomousGoAndReturn a1 = new AutomousGoAndReturn();
     OnArm a2 = new OnArm();
     GoUpChargedStation a3 = new GoUpChargedStation();
-    a1.schedule();
-
-
+    IntakeOn a4 = new IntakeOn();
+    IntakeOff a5 = new IntakeOff();
+    OpenAndCloseClaw a6 = new OpenAndCloseClaw();
+    AutonomousRoute a7 = new AutonomousRoute();
+    ReturnRobot a8 = new ReturnRobot();
+    turnLeftDriveTrain a9 = new turnLeftDriveTrain();
+    OnArm a10 = new OnArm();
+    ArmEncoder a11 = new ArmEncoder();
+    EncoderArmBackwards a12 = new EncoderArmBackwards();
+    onMotors xd = new onMotors();
+    ResetEncoderDt a13 = new ResetEncoderDt();
+    TurnLeftDTE a14 = new TurnLeftDTE();
+    AutonomousSequence1 a15 = new AutonomousSequence1();
+    
+    Robot.getRobotContainer().getDriveTrain().resetEncoderDt();
+   
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
 
   }
 
-
-  
-
-
-
-
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+    Robot.getRobotContainer().getDriveTrain().turnLeft();
+  }
 
   @Override
   public void teleopInit() {
@@ -109,14 +131,17 @@ public class Robot extends TimedRobot {
     // this line or comment it out.
     MoveArm t1 = new MoveArm();
     driveRobot t2 = new driveRobot();
-
+    
     t1.schedule();
     t2.schedule();
   }
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+
+
+  }
 
   @Override
   public void testInit() {

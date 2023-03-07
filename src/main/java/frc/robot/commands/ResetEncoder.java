@@ -7,21 +7,23 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class OffArm extends CommandBase {
-  /** Creates a new OffArm. */
-  public OffArm() {
+public class ResetEncoder extends CommandBase {
+  /** Creates a new ResetEncoder. */
+  public ResetEncoder() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.getRobotContainer().getArm());
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    Robot.getRobotContainer().getArm().resetEncoderArm();
+
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.getRobotContainer().getArm().stopArm();
   }
 
   // Called once the command ends or is interrupted.

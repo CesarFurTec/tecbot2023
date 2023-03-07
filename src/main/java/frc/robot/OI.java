@@ -12,6 +12,7 @@ import frc.robot.commands.ChangeToSpeed;
 import frc.robot.commands.ChangeToTorque;
 import frc.robot.commands.EncoderArmBackwards;
 import frc.robot.commands.EncoderArmForward;
+import frc.robot.commands.ExtendArm;
 import frc.robot.commands.IntakeOff;
 import frc.robot.commands.IntakeOn;
 import frc.robot.commands.OffArm;
@@ -20,31 +21,42 @@ import frc.robot.commands.OnArm;
 import frc.robot.commands.OnArmT;
 import frc.robot.commands.ResetEncoder;
 import frc.robot.commands.ResetEncoderDt;
+import frc.robot.commands.RetractArm;
 
 /** Add your docs here. */
 public class OI {
    public static OI instance;
- private TecbotController pilot;
- private TecbotController copilot;
+ private TecbotController Regina;
+ private TecbotController Mario;
  
 
     public OI(){
-      pilot = new TecbotController(RobotMap.pilotPort, TecbotConstants.CONTROLLER_TYPE_PILOT);
-      copilot = new TecbotController(RobotMap.copilotPort, TecbotConstants.CONTROLLER_TYPE_COPILOT);
+      Regina = new TecbotController(RobotMap.pilotPort, TecbotConstants.CONTROLLER_TYPE_PILOT);
+      Mario = new TecbotController(RobotMap.copilotPort, TecbotConstants.CONTROLLER_TYPE_COPILOT);
 
    }
 
    public void configureButtonBindings(){
       
+     /* Regina.whenPressed(TecbotController.ButtonType.A, new OnArmT());
+      Regina.whenPressed(TecbotController.ButtonType.B, new OffArm());
+      Regina.whenPressed(TecbotController.ButtonType.X, new ChangeToSpeed());
+      Regina.whenPressed(TecbotController.ButtonType.Y, new ChangeToTorque());
+*/
+     Regina.whenPressed(TecbotController.ButtonType.A, new IntakeOn());
+      Regina.whenPressed(TecbotController.ButtonType.B, new IntakeOff());
+      Regina.whenPressed(TecbotController.ButtonType.X, new ExtendArm());
+      Regina.whenPressed(TecbotController.ButtonType.Y, new RetractArm());
+
+      Regina.whenPressed(TecbotController.ButtonType.LB, new ChangeToSpeed());
+      Regina.whenPressed(TecbotController.ButtonType.RB, new ChangeToTorque());
+      
       
 
-      pilot.whenPressed(TecbotController.ButtonType.A, new IntakeOn());
-      pilot.whenPressed(TecbotController.ButtonType.B, new IntakeOff());
-      pilot.whenPressed(TecbotController.ButtonType.X, new ChangeToSpeed());
-      pilot.whenPressed(TecbotController.ButtonType.Y, new ChangeToTorque());
-      
-      copilot.whenPressed(TecbotController.ButtonType.A, new EncoderArmBackwards());
-      copilot.whenPressed(TecbotController.ButtonType.B, new EncoderArmForward());
+      Mario.whenPressed(TecbotController.ButtonType.A, new OnArmT()); // x
+      Mario.whenPressed(TecbotController.ButtonType.B, new OffArm()); // o
+     // Mario.whileHeld(TecbotController.ButtonType.X, new ChangeToSpeed()); // []
+     // Mario.whileHeld(TecbotController.ButtonType.Y, new ChangeToTorque()); // A
    }
 
    public static OI getInstance() {
@@ -55,11 +67,11 @@ public class OI {
   }
 
    public TecbotController getPilot(){
-      return pilot;
+      return Regina;
    }
 
    public TecbotController getCopilot(){
-      return copilot;
+      return Mario;
    }
 
 }

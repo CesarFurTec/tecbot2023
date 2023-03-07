@@ -7,16 +7,19 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import frc.robot.resources.TecbotConstants;
+import frc.robot.subsystems.driveTrain;
 
-public class turnLeftDriveTrain extends CommandBase {
-  /** Creates a new trunLeft. */
-  boolean finished = false;
 
-  public turnLeftDriveTrain() {
+public class balanceCommand extends CommandBase {
+  boolean isLeveled = false;
+  /** Creates a new onMotors. */
+  public balanceCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.getRobotContainer().getDriveTrain());
-  }
+  
+    }
 
   // Called when the command is initially scheduled.
   @Override
@@ -25,14 +28,22 @@ public class turnLeftDriveTrain extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() { 
-    Robot.getRobotContainer().getDriveTrain().turnLeft();
-    double distance = TecbotConstants.setpointTurn - Robot.getRobotContainer().getDriveTrain().getDriveTrainFeet();
+  public void execute() {
+   // Robot.getRobotContainer().getDriveTrain().driveForwardWithEncoders();
+   double currentEncoderR = Robot.getRobotContainer().getDriveTrain().getRightEncoder();
+   double currentEncoderL = Robot.getRobotContainer().getDriveTrain().getLeftEncoder();
+
+   Robot.getRobotContainer().getDriveTrain().balanceL(currentEncoderL, currentEncoderR);
     
-    if(distance*TecbotConstants.kP <= 0.03);
-    finished = true;
-   }
+   boolean leftBalance = Robot.getRobotContainer().getDriveTrain().getLeftBalance();
+   boolean rightBalance = Robot.getRobotContainer().getDriveTrain().getRightBalance();
+    
    
+    if(leftBalance == true && rightBalance == true){
+        isLeveled = true;
+    }
+  }
+
 
   // Called once the command ends or is interrupted.
   @Override
@@ -41,6 +52,6 @@ public class turnLeftDriveTrain extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return finished;
+    return isLeveled;
   }
 }

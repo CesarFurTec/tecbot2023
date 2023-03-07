@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
+import frc.robot.resources.TecbotConstants;
 import frc.robot.subsystems.driveTrain;
 
 
@@ -23,14 +24,18 @@ public class onMotors extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+   // Robot.getRobotContainer().getDriveTrain().resetEncoderDt();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     Robot.getRobotContainer().getDriveTrain().driveForwardWithEncoders();
-
-    if(Robot.getRobotContainer().getDriveTrain().getEncoder()>=8){
+    
+    double distance = TecbotConstants.setpoint - Robot.getRobotContainer().getDriveTrain().getDriveTrainFeet();
+    
+    System.out.println(distance);
+    if(distance<= 0.2){ ///////////////7//maybe change this ////////////////////////////////////////////////7
       finished = true;
     }
   }

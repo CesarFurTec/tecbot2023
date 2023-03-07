@@ -6,40 +6,24 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutonomousRoute extends SequentialCommandGroup {
-  /** Creates a new AutonomousRoute. */
-  public AutonomousRoute() {
+public class AutonomousSequence4 extends SequentialCommandGroup {
+  /** Creates a new AutonomousSequence4. */
+  public AutonomousSequence4() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new OnArm(), 
-      new WaitCommand(0.32), 
-      new OffArm(), 
-      new WaitCommand(1),
-      new IntakeOff(),
-      new WaitCommand(1),
-      new OnArmF(), 
-      new WaitCommand(0.3), 
-      new OffArm(),
-      new WaitCommand(1),
+      new DriveRobotBackwards(),
+      new WaitCommand(0.3),
+      new OffMotors(),
+      new WaitCommand(0.5), 
+      new ResetEncoderDt(), 
       new onMotors(), 
-      new WaitCommand(1.3),
-      new OffMotors(),
-      new WaitCommand(1), 
-      new ReturnRobot(), 
-      new WaitCommand(0.75), 
-      new IntakeOn(), 
       new WaitCommand(0.5), 
-      new DriveRobotBackwards(), 
-      new WaitCommand(0.69), 
-      new OffMotors(),
-      new balanceCommand(), 
-      new WaitCommand(0.5), 
-      new ReturnRobot());
+      new ResetEncoderDt(), 
+      new DriveRobotBackwards());
   }
 }

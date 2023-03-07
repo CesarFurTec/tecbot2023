@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.ArmEncoder;
+import frc.robot.commands.AutoMonterrey01;
 import frc.robot.commands.AutomousGoAndReturn;
 import frc.robot.commands.AutonomousRoute;
 import frc.robot.commands.AutonomousSequence1;
@@ -91,7 +92,7 @@ public class Robot extends TimedRobot {
     //m_robotContainer.getDriveTrain().setDefaultCommand(new turnLeftDriveTrain());  
     // schedule the autonomous command (example)
     
-    autonomusCommandGroup a = new autonomusCommandGroup();
+    /*autonomusCommandGroup a = new autonomusCommandGroup();
     AutomousGoAndReturn a1 = new AutomousGoAndReturn();
     OnArm a2 = new OnArm();
     GoUpChargedStation a3 = new GoUpChargedStation();
@@ -104,23 +105,26 @@ public class Robot extends TimedRobot {
     OnArm a10 = new OnArm();
     ArmEncoder a11 = new ArmEncoder();
     EncoderArmBackwards a12 = new EncoderArmBackwards();
-    onMotors xd = new onMotors();
+    
     ResetEncoderDt a13 = new ResetEncoderDt();
     TurnLeftDTE a14 = new TurnLeftDTE();
-    AutonomousSequence1 a15 = new AutonomousSequence1();
+    AutonomousSequence1 a15 = new AutonomousSequence1();*/
+
+   // onMotors xd = new onMotors();
+   AutoMonterrey01 auto_mty = new AutoMonterrey01();
+   System.out.println(" auto_mty");
     
-    Robot.getRobotContainer().getDriveTrain().resetEncoderDt();
-   
-    if (m_autonomousCommand != null) {
+    auto_mty.schedule();
+
+   /* if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
-    }
+    }*/
 
   }
 
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    Robot.getRobotContainer().getDriveTrain().turnLeft();
   }
 
   @Override
@@ -129,10 +133,9 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    MoveArm t1 = new MoveArm();
     driveRobot t2 = new driveRobot();
-    
-    t1.schedule();
+   
+
     t2.schedule();
   }
 

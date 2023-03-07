@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
 
+import edu.wpi.first.math.Num;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.AnalogGyro;
@@ -24,6 +25,7 @@ import frc.robot.commands.onMotors;
 import frc.robot.commands.turnLeftDriveTrain;
 import frc.robot.resources.Navx;
 import frc.robot.resources.RobotConfigurator;
+import frc.robot.resources.TecbotConstants;
 import frc.robot.resources.TecbotSpeedController;
 
 public class driveTrain extends SubsystemBase {
@@ -32,15 +34,11 @@ public class driveTrain extends SubsystemBase {
   TecbotSpeedController m2;
   TecbotSpeedController m3;
   TecbotSpeedController m4; 
-  Timer t1;
+  boolean leftSideBalanced = false, rightSideBalanced = false;
+  
+
 
   RelativeEncoder driveTrainEncoderL1, driveTrainEncoderL2, driveTrainEncoderR1, driveTrainEncoderR2;
-  
-  double kDriveTick2Feet = 1.0 * 4 * Math.PI / 72;
-  double setpoint = 9.16;
-  double kP = 1;
-  double setpointTurn = 14.32;
-  double setpointTurnR = 14.258;
 
   DoubleSolenoid transmition;
 
@@ -49,9 +47,11 @@ public class driveTrain extends SubsystemBase {
   private ADXRS450_Gyro gyro = new ADXRS450_Gyro(kGyroPort);
   
  
+// m1 & m2 left 
+
   public driveTrain() {
-  m1 = new TecbotSpeedController(RobotMap.driveTrainPorts[3], RobotMap.chassisMotor[0]);
-  m2 = new TecbotSpeedController(RobotMap.driveTrainPorts[1], RobotMap.chassisMotor[1]); 
+  m1 = new TecbotSpeedController(RobotMap.driveTrainPorts[1], RobotMap.chassisMotor[0]);
+  m2 = new TecbotSpeedController(RobotMap.driveTrainPorts[3], RobotMap.chassisMotor[1]); 
   m3 = new TecbotSpeedController(RobotMap.driveTrainPorts[0], RobotMap.chassisMotor[1]);
   m4 = new TecbotSpeedController(RobotMap.driveTrainPorts[2], RobotMap.chassisMotor[1]);
   
@@ -59,7 +59,6 @@ public class driveTrain extends SubsystemBase {
   m2.getCANSparkMax().setIdleMode(IdleMode.kBrake);
   m3.getCANSparkMax().setIdleMode(IdleMode.kBrake);
   m4.getCANSparkMax().setIdleMode(IdleMode.kBrake);
-
   
   driveTrainEncoderL1 = m1.getCANSparkMax().getEncoder();
   driveTrainEncoderL2 = m2.getCANSparkMax().getEncoder();
@@ -77,16 +76,16 @@ public class driveTrain extends SubsystemBase {
 
 
   public void driveForwardWithEncoders(){
-  double sensorPosition =  -1 * driveTrainEncoderL1.getPosition() * kDriveTick2Feet;
+  double sensorPosition =  -1 * driveTrainEncoderL1.getPosition() * TecbotConstants.kDriveTick2Feet;
 
-  double error = setpoint - sensorPosition;
+  double error = TecbotConstants.setpoint - sensorPosition;
 
-  System.out.println("distance: " + setpoint);
+  System.out.println("distance: " + TecbotConstants.setpoint);
 
-  double outputSpeed = kP*error/setpoint;
+  double outputSpeed =( TecbotConstants.kP*error/TecbotConstants.setpoint) * RobotMap.chassisSpeedR;
 
   SmartDashboard.putNumber("Drivetrain distance: ", sensorPosition);
-  SmartDashboard.putNumber("setpoint: ", setpoint);
+  SmartDashboard.putNumber("setpoint: ", TecbotConstants.setpoint);
   SmartDashboard.putNumber("error: ", error);
   SmartDashboard.putNumber("output speed: ", outputSpeed);
    
@@ -96,6 +95,47 @@ public class driveTrain extends SubsystemBase {
    m4.set(outputSpeed); 
   }
 
+  public void driveWithEncoders(double newSetPoint){
+    System.out.println("drivewencoders" + newSetPoint);
+    double sensorPosition =  -1 * driveTrainEncoderL1.getPosition() * TecbotConstants.kDriveTick2Feet;
+  
+    double error = newSetPoint - sensorPosition;
+  
+    System.out.println("distance: " + newSetPoint);
+  
+    double outputSpeed = TecbotConstants.kP*error/newSetPoint;
+  
+    SmartDashboard.putNumber("Drivetrain distance: ", sensorPosition);
+    SmartDashboard.putNumber("setpoint: ",newSetPoint);
+    SmartDashboard.putNumber("error: ", error);
+    SmartDashboard.putNumber("output speed: ", outputSpeed);
+     
+     m1.set(-outputSpeed);
+     m2.set(-outputSpeed); 
+     m3.set(outputSpeed);
+     m4.set(outputSpeed); 
+    }
+
+  public void driveForwardWithEncodersShort(){
+    double sensorPosition =  driveTrainEncoderL1.getPosition() * TecbotConstants.kDriveTick2Feet;
+  
+    double error = TecbotConstants.setpointShort - sensorPosition;
+  
+    System.out.println("distance: " + TecbotConstants.setpoint);
+  
+    double outputSpeed = TecbotConstants.kP*error/TecbotConstants.setpoint;
+  
+    SmartDashboard.putNumber("Drivetrain distance: ", sensorPosition);
+    SmartDashboard.putNumber("setpoint: ", TecbotConstants.setpoint);
+    SmartDashboard.putNumber("error: ", error);
+    SmartDashboard.putNumber("output speed: ", outputSpeed);
+     
+     m1.set(-outputSpeed);
+     m2.set(-outputSpeed); 
+     m3.set(outputSpeed);
+     m4.set(outputSpeed); 
+    }
+
   public void resetEncoderDt(){
     driveTrainEncoderL1.setPosition(0);
     driveTrainEncoderL2.setPosition(0);
@@ -103,8 +143,12 @@ public class driveTrain extends SubsystemBase {
     driveTrainEncoderR2.setPosition(0);
   }  
 
-  public double getEncoder(){
-   return -1 * driveTrainEncoderL1.getPosition() * kDriveTick2Feet;
+  public double getDriveTrainFeet(){
+   return -1 * driveTrainEncoderL1.getPosition() * TecbotConstants.kDriveTick2Feet;
+  }
+  
+  public double getDriveTrainFeetR(){
+    return driveTrainEncoderR1.getPosition();
   }
 
   public void driveForward(){
@@ -115,11 +159,19 @@ public class driveTrain extends SubsystemBase {
   }
 
   public void driveBackwards(){
-     m1.set(RobotMap.chassisSpeedL);
-     m2.set(RobotMap.chassisSpeedL); 
-     m3.set(-RobotMap.chassisSpeedR);
-     m4.set(-RobotMap.chassisSpeedR); 
+    double sensorPositionBackWards = driveTrainEncoderL1.getPosition() * TecbotConstants.kDriveTick2Feet;
+
+    double error = TecbotConstants.setpointBakcwards - sensorPositionBackWards;
+
+    double outputSpeedBackwards = TecbotConstants.kP*error/TecbotConstants.setpointBakcwards;
+
+     m1.set(outputSpeedBackwards);
+     m2.set(outputSpeedBackwards); 
+     m3.set(-outputSpeedBackwards);
+     m4.set(-outputSpeedBackwards); 
     }
+  
+  
 
   public void stop(){
     m1.set(0);
@@ -133,32 +185,38 @@ public class driveTrain extends SubsystemBase {
 //return t.get() >= sec;
  //}
   public void turnLeft(){
-    double sensorPostionTurn = driveTrainEncoderR1.getPosition();
+    double sensorPostionTurn = driveTrainEncoderL1.getPosition()*TecbotConstants.kDriveTick2Feet;
 
-    double errorTurn = setpointTurn - sensorPostionTurn;
+    double errorTurn = TecbotConstants.setpointTurn - sensorPostionTurn;
 
-    double outputSpeedTurn = kP*errorTurn/setpointTurn;
+    double outputSpeedTurn = TecbotConstants.kP*errorTurn/TecbotConstants.setpointTurn;
 
     SmartDashboard.putNumber("Encoder Position: ", sensorPostionTurn);
-    SmartDashboard.putNumber("setpoint: ", setpointTurn);
+    SmartDashboard.putNumber("setpoint: ", TecbotConstants.setpointTurn);
     SmartDashboard.putNumber("error: ", errorTurn);
     SmartDashboard.putNumber("output speed: ", outputSpeedTurn);
+
+    System.out.println("Encoder Position: " + sensorPostionTurn);
+    System.out.println("setpoint: " + TecbotConstants.setpointTurn);
+    System.out.println("error: " + errorTurn);
+    System.out.println("output speed: " + outputSpeedTurn);
     
-    m1.set(outputSpeedTurn);
-    m2.set(outputSpeedTurn); 
-    m3.set(outputSpeedTurn);
-    m4.set(outputSpeedTurn); 
+
+    //m1.set(outputSpeedTurn);
+    //m2.set(outputSpeedTurn); 
+    //m3.set(outputSpeedTurn);
+    //m4.set(outputSpeedTurn); 
   }
 
   public void turnRight(){
     double sensorPostionTurn = -1*driveTrainEncoderR1.getPosition();
 
-    double errorTurn = setpointTurnR - sensorPostionTurn;
+    double errorTurn = TecbotConstants.setpointTurnR - sensorPostionTurn;
 
-    double outputSpeedTurn = kP*errorTurn/setpointTurn;
+    double outputSpeedTurn = TecbotConstants.kP*errorTurn/TecbotConstants.setpointTurn;
 
     SmartDashboard.putNumber("Encoder Position: ", sensorPostionTurn);
-    SmartDashboard.putNumber("setpoint: ", setpointTurn);
+    SmartDashboard.putNumber("setpoint: ", TecbotConstants.setpointTurn);
     SmartDashboard.putNumber("error: ", errorTurn);
     SmartDashboard.putNumber("output speed: ", outputSpeedTurn);
     
@@ -167,6 +225,24 @@ public class driveTrain extends SubsystemBase {
     m3.set(-outputSpeedTurn);
     m4.set(-outputSpeedTurn);
   }
+
+  /*public void turn45(){
+    double sensorPositionTurn = (-1*driveTrainEncoderR1.getPosition()) * TecbotConstants.kDriveTick2Feet;
+
+   // double angleGet = sensorPositionTurn/45;
+
+    double errorTurn = TecbotConstants.setpointTurnR - sensorPositionTurn;
+
+    double outputSpeedTurn = TecbotConstants.kP*errorTurn/TecbotConstants.setpointTurn;
+
+    m1.set(-outputSpeedTurn);
+    m2.set(-outputSpeedTurn); 
+    m3.set(-outputSpeedTurn);
+    m4.set(-outputSpeedTurn);
+  } 
+  */
+
+  //Nota de que solo hay que modificar el setpoint -_-
 
   public void drive(double x, double y){
     Robot.getRobotContainer().getOI().getPilot().setOffset(RobotMap.OFFSET);
@@ -196,44 +272,99 @@ public class driveTrain extends SubsystemBase {
 
   public double getAngle(){
   System.out.println(gyro.getAngle());
-   SmartDashboard.putNumber("Angle: ", gyro.getAngle());
-   double insideAngle = gyro.getAngle();
-    return insideAngle;
+  SmartDashboard.putNumber("Angle: ", gyro.getAngle());
+  return gyro.getAngle();
   }
 
-  public void setAngle()
-  {
-    double innerAngle = getAngle();
-    if(innerAngle >= 360)
-    {
-      innerAngle -= 360;
-    }
+  public void driveBackwardsTime(){
+m1.set(RobotMap.chassisSpeedL);
+m2.set(RobotMap.chassisSpeedL);
+m3.set(-RobotMap.chassisSpeedR);
+m4.set(-RobotMap.chassisSpeedR); 
+  }
 
-    if(innerAngle >= (10 + RobotMap.gyroMaxAngle))
-    {
-      m1.set(-RobotMap.chassisSpeedL * (innerAngle / 10) * RobotMap.angleSpeed);
-      m2.set(-RobotMap.chassisSpeedL * (innerAngle / 10) * RobotMap.angleSpeed);
-      m3.set(RobotMap.chassisSpeedR * (innerAngle / 10) * RobotMap.angleSpeed);
-      m4.set(RobotMap.chassisSpeedR * (innerAngle / 10) * RobotMap.angleSpeed); 
-    }else if(innerAngle <= (-10 + RobotMap.gyroMaxAngle))
-    {
-      m1.set(RobotMap.chassisSpeedL * (innerAngle / 10) * RobotMap.angleSpeed);
-      m2.set(RobotMap.chassisSpeedL * (innerAngle / 10) * RobotMap.angleSpeed); 
-      m3.set(-RobotMap.chassisSpeedR * (innerAngle / 10) * RobotMap.angleSpeed);
-      m4.set(-RobotMap.chassisSpeedR * (innerAngle / 10) * RobotMap.angleSpeed); 
-    }else if(innerAngle < (10 + RobotMap.gyroMaxAngle) && innerAngle > (-10 + RobotMap.gyroMaxAngle))
-    {
+  public void balanceL (double initEncoderL, double initEncoderR)
+  {
+    double decimalValL =initEncoderL %= 1;  
+
+    System.out.println("Valor decimal ="+ decimalValL);
+
+    double encoderMultL= initEncoderL - decimalValL;
+
+    int sideVarianceNegative = 1;
+
+    if(driveTrainEncoderL1.getPosition() > (initEncoderL - RobotMap.encoderTolerance) &&  driveTrainEncoderL1.getPosition() < (initEncoderL + RobotMap.encoderTolerance)){ //no girado
       m1.set(0);
       m2.set(0);
+      leftSideBalanced = true;
+    }
+    else if (driveTrainEncoderL1.getPosition() < (initEncoderL - RobotMap.encoderTolerance)) //giradohaciatras
+    {    
+      m1.set(RobotMap.chassisSpeedL *sideVarianceNegative* ((encoderMultL + RobotMap.encoderTolerance)/10));
+      m2.set(RobotMap.chassisSpeedL *sideVarianceNegative* ((encoderMultL + RobotMap.encoderTolerance)/10));  
+      leftSideBalanced = false;    
+    }
+
+    else if(driveTrainEncoderL1.getPosition() > (initEncoderL + RobotMap.encoderTolerance)) //girado haia adelante
+    {
+      
+      m1.set(-RobotMap.chassisSpeedL *sideVarianceNegative* ((encoderMultL + RobotMap.encoderTolerance)/10));
+      m2.set(-RobotMap.chassisSpeedL *sideVarianceNegative* ((encoderMultL + RobotMap.encoderTolerance)/10));
+      leftSideBalanced = false;
+    }
+
+    double decimalValR = initEncoderR %= 1;  
+
+    System.out.println("Valor decimal ="+ decimalValR);
+
+    double encoderMultR= initEncoderR - decimalValR;
+
+    if(driveTrainEncoderR1.getPosition() > (initEncoderR - RobotMap.encoderTolerance) &&  driveTrainEncoderR1.getPosition() < (initEncoderR + RobotMap.encoderTolerance)){ //no girado
       m3.set(0);
       m4.set(0);
+      rightSideBalanced = true;
     }
+    else if (driveTrainEncoderR1.getPosition() < (initEncoderR - RobotMap.encoderTolerance)) //giradohaciatras
+    {    
+      m3.set(-RobotMap.chassisSpeedR *sideVarianceNegative* ((encoderMultR + RobotMap.encoderTolerance)/10));
+      m4.set(-RobotMap.chassisSpeedR *sideVarianceNegative* ((encoderMultR + RobotMap.encoderTolerance)/10));      
+      rightSideBalanced = false;
+    }
+
+    else if(driveTrainEncoderR1.getPosition() > (initEncoderR + RobotMap.encoderTolerance)) //girado haia adelante
+    {
+      
+      m3.set(RobotMap.chassisSpeedR *sideVarianceNegative* ((encoderMultR + RobotMap.encoderTolerance)/10));
+      m4.set(RobotMap.chassisSpeedR *sideVarianceNegative* ((encoderMultR + RobotMap.encoderTolerance)/10));
+      rightSideBalanced = false;
+    }
+    
   }
 
-  public void calibrateGyro()
+  public boolean getLeftBalance()
   {
-    gyro.calibrate();
-    gyro.reset();
+    return leftSideBalanced;
+  }
+  public boolean getRightBalance()
+  {
+    return rightSideBalanced;
+  }
+
+  public double getLeftEncoder()
+  {
+    return driveTrainEncoderL1.getPosition();
+  }
+  public double getRightEncoder()
+  {
+    return driveTrainEncoderR1.getPosition();
+  }
+
+  public void resetEncoders()
+  {
+    driveTrainEncoderL1.setPosition(0);
+    driveTrainEncoderL2.setPosition(0);
+    driveTrainEncoderR2.setPosition(0);
+    driveTrainEncoderR1.setPosition(0);
   }
 }
 

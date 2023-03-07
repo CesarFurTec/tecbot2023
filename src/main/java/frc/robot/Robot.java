@@ -27,15 +27,19 @@ import frc.robot.commands.ResetEncoderDt;
 import frc.robot.commands.ReturnRobot;
 import frc.robot.commands.TurnLeftDTE;
 import frc.robot.commands.autonomusCommandGroup;
+import frc.robot.commands.calibrateGyro;
 import frc.robot.commands.driveForwardDT;
 import frc.robot.commands.driveRobot;
 import frc.robot.commands.AutoArm;
+import frc.robot.commands.CameraCommand;
 import frc.robot.commands.onMotors;
 import frc.robot.commands.EncoderReader;
 import frc.robot.commands.turnLeftDriveTrain;
 import frc.robot.resources.Navx;
+import frc.robot.subsystems.Camera;
 import frc.robot.subsystems.driveTrain;
 import frc.robot.RobotContainer;
+
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -57,6 +61,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     robotcontainer = new RobotContainer();
     robotcontainer.configureButtonBindings();
+    cameraRetake();
    
   }
   public static RobotContainer getRobotContainer() {
@@ -152,12 +157,21 @@ public class Robot extends TimedRobot {
     driveRetake();
   }
 
+  public static void cameraRetake()
+  {
+    CameraCommand cc1 = new CameraCommand();
+    cc1.schedule();
+  }
+
   public static void driveRetake()
   {
     driveRobot t2 = new driveRobot();
+    
+    //Camera camera = new Camera();
    
 
     t2.schedule();
+    //
   }
 
   /** This function is called periodically during operator control. */

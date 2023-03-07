@@ -16,6 +16,7 @@ import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.driveTrain;
+import frc.robot.subsystems.Camera;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -29,6 +30,7 @@ public class RobotContainer {
   private OI oi;
   private Intake intake;
   public Arm arm;
+  public Camera camera;
 
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
@@ -40,6 +42,7 @@ public class RobotContainer {
      drivetrain = new driveTrain();
      intake = new Intake();
      arm = new Arm();
+     camera = new Camera();
   
      //configureButtonBindings();
   }
@@ -48,6 +51,11 @@ public class RobotContainer {
 
     return drivetrain;
 
+  }
+
+  public Camera getCamera()
+  {
+    return camera;
   }
 
   public static OI getOI(){

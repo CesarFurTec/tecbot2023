@@ -377,6 +377,17 @@ public class driveTrain extends SubsystemBase {
     driveTrainEncoderR2.setPosition(0);
     driveTrainEncoderR1.setPosition(0);
   }
+
+  public void calibrateGyro()
+  {
+
+  }
+
+  public void setAngle()
+  {
+    
+  }
+
 }
 
 

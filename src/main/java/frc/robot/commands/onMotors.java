@@ -32,7 +32,7 @@ public class onMotors extends CommandBase {
   public void execute() {
     Robot.getRobotContainer().getDriveTrain().driveForwardWithEncoders();
     
-    double distance = TecbotConstants.setpoint - Robot.getRobotContainer().getDriveTrain().getDriveTrainFeet();
+    double distance = TecbotConstants.setpoint - Robot.getRobotContainer().getDriveTrain().getDriveTrainFeetL();
     
     System.out.println(distance);
     if(distance<= 0.2){ ///////////////7//maybe change this ////////////////////////////////////////////////7

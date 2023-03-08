@@ -96,25 +96,194 @@ public class driveTrain extends SubsystemBase {
   }
 
   public void driveWithEncoders(double newSetPoint,int dir){
+
     System.out.println("drivewencoders" + newSetPoint);
-    double sensorPosition =  -1 * driveTrainEncoderL1.getPosition() * TecbotConstants.kDriveTick2Feet;
-  
-    double error = newSetPoint - sensorPosition;
+    //double sensorPosition =  -1 * driveTrainEncoderL1.getPosition() * TecbotConstants.kDriveTick2Feet;
+    double sensorPosition =  driveTrainEncoderL1.getPosition() * TecbotConstants.kDriveTick2Feet;
+
+    double error = newSetPoint - Math.abs(sensorPosition); //adding the abs
   
     System.out.println("distance: " + newSetPoint);
-  
+
+
     double outputSpeed = TecbotConstants.kP*error/(newSetPoint + 0.0001);
   
     SmartDashboard.putNumber("Drivetrain distance: ", sensorPosition);
     SmartDashboard.putNumber("setpoint: ",newSetPoint);
     SmartDashboard.putNumber("error: ", error);
     SmartDashboard.putNumber("output speed: ", outputSpeed);
-     
+
      m1.set(-outputSpeed*dir);
      m2.set(-outputSpeed*dir); 
      m3.set(outputSpeed*dir);
      m4.set(outputSpeed*dir); 
     }
+
+  public boolean moveWithEncodersL (double current, double max, double dir)
+  {
+    System.out.println("current:"+ current + "max"+ max);
+    if(dir == 1)
+    {
+      if(current >= max - 1)
+      {
+        System.out.println(" FRONT  FRONT  STOP STOP STOP");
+        m1.set(0);
+        //m2.set(0);
+        //m3.set(0);
+        //m4.set(0); 
+        return true;
+      }else
+      {
+        System.out.println("////////////////////////  FRONT  ////////////////////////////////");
+        m1.set(-RobotMap.chassisSpeedL);
+        //m2.set(-RobotMap.chassisSpeedL); 
+        //m3.set(RobotMap.chassisSpeedL);
+        //m4.set(RobotMap.chassisSpeedL); 
+        return false;
+      }
+    }else if(dir == -1)
+    {
+      if(current <= (max * dir) + 1)
+      {
+        System.out.println("BACK  BACK   STOP STOP STOP");
+        m1.set(0);
+        //m2.set(0);
+        //m3.set(0);
+        //m4.set(0);
+        return true; 
+      }else
+      {
+        System.out.println("////////////////////  BACK   ///////////////////////");
+        m1.set(RobotMap.chassisSpeedL);
+        //m2.set(RobotMap.chassisSpeedL); 
+        //m3.set(-RobotMap.chassisSpeedL);
+        //m4.set(-RobotMap.chassisSpeedL); 
+        return false;
+      }
+    }
+     
+    return false;
+  }
+
+  public boolean moveWithEncodersL2 (double current, double max, double dir)
+  {
+    System.out.println("current:"+ current + "max"+ max);
+    if(dir == 1)
+    {
+      if(current >= max - 1)
+      {
+        System.out.println(" FRONT  FRONT  STOP STOP STOP");
+        m2.set(0);
+      
+        return true;
+      }else
+      {
+        System.out.println("////////////////////////  FRONT  ////////////////////////////////");
+       
+        m2.set(-RobotMap.chassisSpeedL); 
+         
+        return false;
+      }
+    }else if(dir == -1)
+    {
+      if(current <= (max * dir) + 1)
+      {
+        System.out.println("BACK  BACK   STOP STOP STOP");
+        
+        m2.set(0);
+        
+        return true; 
+      }else
+      {
+        System.out.println("////////////////////  BACK   ///////////////////////");
+        
+        m2.set(RobotMap.chassisSpeedL); 
+        
+        return false;
+      }
+    }
+     
+    return false;
+  }
+
+  public boolean moveWithEncodersR (double current, double max, double dir)
+  {
+    System.out.println("current:"+ current + "max"+ max);
+    if(dir == 1)
+    {
+      if(current >= max - 1)
+      {
+        System.out.println(" FRONT  FRONT  STOP STOP STOP");
+        m3.set(0);
+        //m4.set(0); 
+        return true;
+      }else
+      {
+        System.out.println("////////////////////////  FRONT  ////////////////////////////////");
+        m3.set(RobotMap.chassisSpeedL);
+        //m4.set(RobotMap.chassisSpeedL); 
+        return false;
+      }
+    }else if(dir == -1)
+    {
+      if(current <= (max * dir) + 1)
+      {
+        System.out.println("BACK  BACK   STOP STOP STOP");
+        m3.set(0);
+        //m4.set(0);
+        return true; 
+      }else
+      {
+        System.out.println("////////////////////  BACK   ///////////////////////");
+        m3.set(-RobotMap.chassisSpeedL);
+        //m4.set(-RobotMap.chassisSpeedL); 
+        return false;
+      }
+    }
+     
+    return false;
+  }
+
+  public boolean moveWithEncodersR2 (double current, double max, double dir)
+  {
+    System.out.println("current:"+ current + "max"+ max);
+    if(dir == 1)
+    {
+      if(current >= max - 1)
+      {
+        System.out.println(" FRONT  FRONT  STOP STOP STOP");
+        m4.set(0); 
+        return true;
+      }else
+      {
+        System.out.println("////////////////////////  FRONT  ////////////////////////////////");
+
+        m4.set(RobotMap.chassisSpeedL); 
+
+        return false;
+      }
+    }else if(dir == -1)
+    {
+      if(current <= (max * dir) + 1)
+      {
+        System.out.println("BACK  BACK   STOP STOP STOP");
+        
+        m4.set(0);
+        return true; 
+      }else
+      {
+        System.out.println("////////////////////  BACK   ///////////////////////");
+        
+        m4.set(-RobotMap.chassisSpeedL); 
+        return false;
+      }
+    }
+     
+    return false;
+  }
+
+
+
 
   public void driveForwardWithEncodersShort(){
     double sensorPosition =  driveTrainEncoderL1.getPosition() * TecbotConstants.kDriveTick2Feet;
@@ -143,13 +312,23 @@ public class driveTrain extends SubsystemBase {
     driveTrainEncoderR2.setPosition(0);
   }  
 
-  public double getDriveTrainFeet(){
+  public double getDriveTrainFeetL(){
    return -1 * driveTrainEncoderL1.getPosition() * TecbotConstants.kDriveTick2Feet;
   }
   
   public double getDriveTrainFeetR(){
-    return driveTrainEncoderR1.getPosition();
+    //return driveTrainEncoderR1.getPosition();
+    return  driveTrainEncoderR1.getPosition() * TecbotConstants.kDriveTick2Feet;
   }
+
+  public double getDriveTrainFeetL2(){
+    return -1 * driveTrainEncoderL2.getPosition() * TecbotConstants.kDriveTick2Feet;
+   }
+   
+   public double getDriveTrainFeetR2(){
+     //return driveTrainEncoderR1.getPosition();
+     return  driveTrainEncoderR2.getPosition() * TecbotConstants.kDriveTick2Feet;
+   }
 
   public void driveForward(){
    m1.set(-RobotMap.chassisSpeedL);

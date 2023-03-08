@@ -23,11 +23,11 @@ public class AutoMonterrey01 extends SequentialCommandGroup {
    // new ReturnRobot(),
     new ResetEncoderDt(),
     new WaitCommand(1.0),
-    new DriveDistance(8,0.5,1), 
+    new DriveDistance(2, 2, 1, -1),
     new WaitCommand(1.0),
     new ResetEncoderDt(),
     new WaitCommand(1.0),
-    new DriveDistance(-8,0.5,1), 
+    new DriveDistance(2, 2,- 1, 1), 
     new WaitCommand(1.0),
     new OffMotors()
    // new WaitCommand(0.5),

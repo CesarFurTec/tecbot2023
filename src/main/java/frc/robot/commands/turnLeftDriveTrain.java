@@ -27,7 +27,7 @@ public class turnLeftDriveTrain extends CommandBase {
   @Override
   public void execute() { 
     Robot.getRobotContainer().getDriveTrain().turnLeft();
-    double distance = TecbotConstants.setpointTurn - Robot.getRobotContainer().getDriveTrain().getDriveTrainFeet();
+    double distance = TecbotConstants.setpointTurn - Robot.getRobotContainer().getDriveTrain().getDriveTrainFeetL();
     
     if(distance*TecbotConstants.kP <= 0.03);
     finished = true;

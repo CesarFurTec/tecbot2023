@@ -19,27 +19,54 @@ public class AutoArm extends SequentialCommandGroup {
 
       //new OnArmT()   levantar
       //new OffArm()   bajar
-      // new IntakeOn()  abrir cerrar
-      //new IntakeOff()  cerrar abrir
+      // new IntakeOn()  abrir 
+      //new IntakeOff()  cerrar 
       // new ExtendArm() extender
       // new RetractArm()  retraer
-    
-      new OffArm(),
-      new WaitCommand(2.0),
+      //new IntakeOff(),
+
+
+      /*new OffArm(),
+      new WaitCommand(0.6),
       new ExtendArm(),
-      new WaitCommand(2.5),
+      new WaitCommand(0.8),
       new IntakeOn(),
-      new WaitCommand(1.5),
+      new WaitCommand(0.5),
       new RetractArm(),
-      new WaitCommand(1.5),
+      new WaitCommand(0.3),
       new OnArmT(),
-      new WaitCommand(1.5),
-      new OutSafe().withTimeout(3.0),
-      new WaitCommand(1.5)
-      //new DriveDistance(3,0.5,1), 
-      //new WaitCommand(1.5),
-      //new DriveDistance(-3,0.5,1), 
-      //new OffMotors()
+      new WaitCommand(0.3),
+     
+      new ResetEncoderDt(),
+      new WaitCommand(0.3),
+      
+      new DriveDistance(6, -1, 6, -1),
+      new WaitCommand(0.3),
+      new DriveDistance(15, 1, 15, 1), 
+      new WaitCommand(0.3),
+      new IntakeOff(),
+      new WaitCommand(0.3),
+      new DriveDistance(-5, 1, 5, 1),
+      new WaitCommand(0.3),
+      new DriveDistance(10, 1, 10, 1),
+      new WaitCommand(0.3),
+      new DriveDistance(3, -1, 3, -1),
+      new WaitCommand(0.3),
+      new OffArm(),
+      new WaitCommand(0.3),
+      new ExtendArm(),
+      new DriveDistance(-9, 1, 9, 1),
+      new WaitCommand(0.3),
+      new DriveDistance(12, 1, 12, 1)*/
+    
+      /*new DriveDistance(4, 1, 4, 1),
+      new WaitCommand(0.3),
+      new DriveDistance(5, -1, 5, -1),
+      new WaitCommand(0.3),*/
+      new DriveDistance(12, 1, -6, 1),
+      new WaitCommand(0.3),
+      new DriveDistance(-12, 1, 24, 1),
+      new WaitCommand(0.3)
 
     );
 

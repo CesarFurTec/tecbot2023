@@ -8,15 +8,17 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
 public class DriveDistance extends CommandBase {
-  double distance, threshold;
-  int direction;
+  double distanceL, distanceR;
+  int directionL, directionR;
   boolean finished;
   /** Creates a new DriveDistance. */
-  public DriveDistance(double d, double t, int dir) {
+  public DriveDistance(double dL,  int dirL, double dR, int dirR) {
     addRequirements(Robot.getRobotContainer().getDriveTrain());
-     distance = d;
-     threshold = t;
-     direction = dir;
+     distanceL = dL;
+     //threshold = t;
+     distanceR = dR;
+     directionL = dirL;
+     directionR = dirR;
 
       //Poner t como signo y que double t sea 1 o -1 para que actualDistance se pueda utilizar tanto al ir para enfrente como para atrás 
 
@@ -26,22 +28,40 @@ public class DriveDistance extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    //Robot.getRobotContainer().getDriveTrain().resetEncoderDt();
+    Robot.getRobotContainer().getDriveTrain().resetEncoderDt();
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double actualDistance = distance - Robot.getRobotContainer().getDriveTrain().getDriveTrainFeet();
+    //double actualDistance = distance - (Math.abs(Robot.getRobotContainer().getDriveTrain().getDriveTrainFeet())); //=error
+    double actualDistanceL =  (Robot.getRobotContainer().getDriveTrain().getDriveTrainFeetL());
+    double actualDistanceR =  (Robot.getRobotContainer().getDriveTrain().getDriveTrainFeetR());
+    boolean a= Robot.getRobotContainer().getDriveTrain().moveWithEncodersL(actualDistanceL, distanceL, directionL);
+    boolean b= Robot.getRobotContainer().getDriveTrain().moveWithEncodersR(actualDistanceR, distanceR, directionR); 
 
-    Robot.getRobotContainer().getDriveTrain().driveWithEncoders(distance, direction);
-    System.out.println("drivedistance : " + actualDistance + "  " + threshold);
+    if (a && b){
+      finished= true;
+  }
+    else {
+      finished=false;
+    }
+    /*Robot.getRobotContainer().getDriveTrain().driveWithEncoders(distance, direction);
+    System.out.println("actualDistance : " + actualDistance + " | threshold : " + threshold + "  | distance: " + distance);
 
-      if(Math.abs( actualDistance ) < (threshold) )
+      if((Math.abs( actualDistance )) < (threshold) )
        {
         System.out.println("finished >");
         finished = true;
       }
+
+      if((Math.abs( actualDistance )) == 0) 
+       {
+        System.out.println("finished >");
+        finished = true;
+      }*/
+
     
   }
 

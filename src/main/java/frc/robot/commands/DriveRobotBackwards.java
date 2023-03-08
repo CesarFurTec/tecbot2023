@@ -27,7 +27,7 @@ public class DriveRobotBackwards extends CommandBase {
   @Override
   public void execute() {
     Robot.getRobotContainer().getDriveTrain().driveBackwards();
-    double distance = TecbotConstants.setpointBakcwards - Robot.getRobotContainer().getDriveTrain().getDriveTrainFeet();
+    double distance = TecbotConstants.setpointBakcwards - Robot.getRobotContainer().getDriveTrain().getDriveTrainFeetL();
     
     if(distance*TecbotConstants.kP <= 0.03){
       finished = true;

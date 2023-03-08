@@ -25,7 +25,7 @@ public class DriveForwardEncoders extends CommandBase {
   @Override
   public void execute() {
     Robot.getRobotContainer().getDriveTrain().driveForwardWithEncodersShort();
-    double distance = TecbotConstants.setpointShort - Robot.getRobotContainer().getDriveTrain().getDriveTrainFeet();
+    double distance = TecbotConstants.setpointShort - Robot.getRobotContainer().getDriveTrain().getDriveTrainFeetL();
     
     if(distance<=0.01){
       finished = true;

@@ -55,6 +55,13 @@ public class driveTrain extends SubsystemBase {
   m3 = new TecbotSpeedController(RobotMap.driveTrainPorts[0], RobotMap.chassisMotor[1]);
   m4 = new TecbotSpeedController(RobotMap.driveTrainPorts[2], RobotMap.chassisMotor[1]);
   
+
+
+  m1.getCANSparkMax().setIdleMode(IdleMode.kCoast);
+  m2.getCANSparkMax().setIdleMode(IdleMode.kCoast);
+  m3.getCANSparkMax().setIdleMode(IdleMode.kCoast);
+  m4.getCANSparkMax().setIdleMode(IdleMode.kCoast);
+
   m1.getCANSparkMax().setIdleMode(IdleMode.kBrake);
   m2.getCANSparkMax().setIdleMode(IdleMode.kBrake);
   m3.getCANSparkMax().setIdleMode(IdleMode.kBrake);
@@ -137,7 +144,7 @@ public class driveTrain extends SubsystemBase {
         System.out.println("////////////////////////  FRONT  ////////////////////////////////");
         m1.set(-RobotMap.chassisSpeedL);
         //m2.set(-RobotMap.chassisSpeedL); 
-        //m3.set(RobotMap.chassisSpeedL);
+        //m3.(RobotMap.chassisSpeedL);
         //m4.set(RobotMap.chassisSpeedL); 
         return false;
       }
@@ -435,18 +442,12 @@ public class driveTrain extends SubsystemBase {
 
   public void changeToSpeed(){
     transmition.set(Value.kForward);
-    m1.getCANSparkMax().setIdleMode(IdleMode.kBrake);
-    m2.getCANSparkMax().setIdleMode(IdleMode.kBrake);
-    m3.getCANSparkMax().setIdleMode(IdleMode.kBrake);
-    m4.getCANSparkMax().setIdleMode(IdleMode.kBrake);
+
   }
 
   public void changeToTorque(){
     transmition.set(Value.kReverse);
-    m1.getCANSparkMax().setIdleMode(IdleMode.kCoast);
-    m2.getCANSparkMax().setIdleMode(IdleMode.kCoast);
-    m3.getCANSparkMax().setIdleMode(IdleMode.kCoast);
-    m4.getCANSparkMax().setIdleMode(IdleMode.kCoast);
+
   }
 
   public void switchTransmission(Boolean transType)

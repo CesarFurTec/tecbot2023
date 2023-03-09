@@ -42,12 +42,12 @@ public class DriveDistance extends CommandBase {
     double actualDistanceR2 =  (Robot.getRobotContainer().getDriveTrain().getDriveTrainFeetR2());
 
     boolean a,b,c,d;
-      a= Robot.getRobotContainer().getDriveTrain().moveWithEncodersL(actualDistanceL, distanceL, directionL);
-      b= Robot.getRobotContainer().getDriveTrain().moveWithEncodersR(actualDistanceR, distanceR, directionR); 
-      c= Robot.getRobotContainer().getDriveTrain().moveWithEncodersL2(actualDistanceL2, distanceL, directionL);
-      //d= Robot.getRobotContainer().getDriveTrain().moveWithEncodersR2(actualDistanceR2, distanceR, directionR);
+      a = Robot.getRobotContainer().getDriveTrain().moveWithEncodersL(actualDistanceL, distanceL, directionL);
+      b = Robot.getRobotContainer().getDriveTrain().moveWithEncodersR(actualDistanceR, distanceR, directionR); 
+      c = Robot.getRobotContainer().getDriveTrain().moveWithEncodersL2(actualDistanceL2, distanceL, directionL);
+      d = Robot.getRobotContainer().getDriveTrain().moveWithEncodersR2(actualDistanceR2, distanceR, directionR);
 
-    d = true;
+
    
 
     if (a && b && c && d){

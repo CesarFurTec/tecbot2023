@@ -200,7 +200,7 @@ public class Robot extends TimedRobot {
       UsbCamera camera = CameraServer.startAutomaticCapture();
       camera.setResolution(320, 240);
       camera.setWhiteBalanceAuto();
-      camera.setFPS(15);
+      camera.setFPS(12);
 
       //CvSink cvSink = CameraServer.getInstance().getVideo();
       CvSink cvSink = CameraServer.getVideo();

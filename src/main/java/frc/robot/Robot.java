@@ -31,6 +31,8 @@ import frc.robot.commands.calibrateGyro;
 import frc.robot.commands.driveForwardDT;
 import frc.robot.commands.driveRobot;
 import frc.robot.commands.AutoArm;
+import frc.robot.commands.AutoCorta;
+import frc.robot.commands.AutoLarga;
 import frc.robot.commands.CameraCommand;
 import frc.robot.commands.onMotors;
 import frc.robot.commands.EncoderReader;
@@ -167,11 +169,22 @@ public class Robot extends TimedRobot {
       */
 
 
-    AutoArm aa= new AutoArm();
+    /*AutoArm aa= new AutoArm();
     System.out.println("autoArm_on");
 
-      aa.schedule();
+      aa.schedule();*/
       
+    /*AutoCorta ac = new AutoCorta();
+    System.out.println("autoCorta_On");
+
+      ac.schedule();*/
+
+
+    AutoLarga al = new AutoLarga();
+    System.out.println("autoLarga_On");
+
+      al.schedule();
+    
 
    /* if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();

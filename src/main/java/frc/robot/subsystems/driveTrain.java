@@ -128,6 +128,8 @@ public class driveTrain extends SubsystemBase {
 
   public boolean moveWithEncodersL (double current, double max, double dir)
   {
+    double slowDown = Math.abs(max/(current+0.0001));
+
     System.out.println("current:"+ current + "max"+ max);
     if(dir == 1)
     {
@@ -142,7 +144,7 @@ public class driveTrain extends SubsystemBase {
       }else
       {
         System.out.println("////////////////////////  FRONT  ////////////////////////////////");
-        m1.set(-RobotMap.chassisSpeedL);
+        m1.set(-RobotMap.autonomusSpeed*slowDown);
         //m2.set(-RobotMap.chassisSpeedL); 
         //m3.(RobotMap.chassisSpeedL);
         //m4.set(RobotMap.chassisSpeedL); 
@@ -161,7 +163,7 @@ public class driveTrain extends SubsystemBase {
       }else
       {
         System.out.println("////////////////////  BACK   ///////////////////////");
-        m1.set(RobotMap.chassisSpeedL);
+        m1.set(RobotMap.autonomusSpeed*slowDown);
         //m2.set(RobotMap.chassisSpeedL); 
         //m3.set(-RobotMap.chassisSpeedL);
         //m4.set(-RobotMap.chassisSpeedL); 
@@ -174,6 +176,8 @@ public class driveTrain extends SubsystemBase {
 
   public boolean moveWithEncodersL2 (double current, double max, double dir)
   {
+    double slowDown = Math.abs(max/(current+0.0001));
+
     System.out.println("current:"+ current + "max"+ max);
     if(dir == 1)
     {
@@ -187,7 +191,7 @@ public class driveTrain extends SubsystemBase {
       {
         System.out.println("////////////////////////  FRONT  ////////////////////////////////");
        
-        m2.set(-RobotMap.chassisSpeedL); 
+        m2.set(-RobotMap.autonomusSpeed*slowDown); 
          
         return false;
       }
@@ -204,7 +208,7 @@ public class driveTrain extends SubsystemBase {
       {
         System.out.println("////////////////////  BACK   ///////////////////////");
         
-        m2.set(RobotMap.chassisSpeedL); 
+        m2.set(RobotMap.autonomusSpeed*slowDown); 
         
         return false;
       }
@@ -215,6 +219,8 @@ public class driveTrain extends SubsystemBase {
 
   public boolean moveWithEncodersR (double current, double max, double dir)
   {
+    
+    double slowDown = Math.abs(max/(current+0.0001));
     System.out.println("current:"+ current + "max"+ max);
     if(dir == 1)
     {
@@ -227,7 +233,7 @@ public class driveTrain extends SubsystemBase {
       }else
       {
         System.out.println("////////////////////////  FRONT  ////////////////////////////////");
-        m3.set(RobotMap.chassisSpeedL);
+        m3.set(RobotMap.autonomusSpeed*slowDown);
         //m4.set(RobotMap.chassisSpeedL); 
         return false;
       }
@@ -242,7 +248,7 @@ public class driveTrain extends SubsystemBase {
       }else
       {
         System.out.println("////////////////////  BACK   ///////////////////////");
-        m3.set(-RobotMap.chassisSpeedL);
+        m3.set(-RobotMap.autonomusSpeed*slowDown);
         //m4.set(-RobotMap.chassisSpeedL); 
         return false;
       }
@@ -253,6 +259,8 @@ public class driveTrain extends SubsystemBase {
 
   public boolean moveWithEncodersR2 (double current, double max, double dir)
   {
+    double slowDown = Math.abs(max/(current+0.0001));
+    
     System.out.println("current:"+ current + "max"+ max);
     if(dir == 1)
     {
@@ -265,7 +273,7 @@ public class driveTrain extends SubsystemBase {
       {
         System.out.println("////////////////////////  FRONT  ////////////////////////////////");
 
-        m4.set(RobotMap.chassisSpeedL); 
+        m4.set(RobotMap.autonomusSpeed*slowDown); 
 
         return false;
       }
@@ -281,7 +289,7 @@ public class driveTrain extends SubsystemBase {
       {
         System.out.println("////////////////////  BACK   ///////////////////////");
         
-        m4.set(-RobotMap.chassisSpeedL); 
+        m4.set(-RobotMap.autonomusSpeed*slowDown); 
         return false;
       }
     }

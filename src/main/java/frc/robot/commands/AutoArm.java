@@ -26,18 +26,19 @@ public class AutoArm extends SequentialCommandGroup {
       //new IntakeOff(),
 
 
-      /*new OffArm(),
-      new WaitCommand(0.6),
+      new OffArm(),
+      new WaitCommand(0.8),
       new ExtendArm(),
       new WaitCommand(0.8),
       new IntakeOn(),
       new WaitCommand(0.5),
       new RetractArm(),
-      new WaitCommand(0.3),
+      new WaitCommand(0.5),
       new OnArmT(),
       new WaitCommand(0.3),
+      new DriveDistance(9.5, -1, 9.5, -1)
      
-      new ResetEncoderDt(),
+      /*new ResetEncoderDt(),
       new WaitCommand(0.3),
       
       new DriveDistance(6, -1, 6, -1),
@@ -63,10 +64,12 @@ public class AutoArm extends SequentialCommandGroup {
       new WaitCommand(0.3),
       new DriveDistance(5, -1, 5, -1),
       new WaitCommand(0.3),*/
-      new DriveDistance(12, 1, -6, 1),
+      
+      
+      /*new DriveDistance(12, 1, -6, 1),
       new WaitCommand(0.3),
       new DriveDistance(-12, 1, 24, 1),
-      new WaitCommand(0.3)
+      new WaitCommand(0.3)*/
 
     );
 

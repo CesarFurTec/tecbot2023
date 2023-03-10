@@ -33,6 +33,7 @@ import frc.robot.commands.driveRobot;
 import frc.robot.commands.AutoArm;
 import frc.robot.commands.AutoCorta;
 import frc.robot.commands.AutoLarga;
+import frc.robot.commands.AutoTry;
 import frc.robot.commands.CameraCommand;
 import frc.robot.commands.onMotors;
 import frc.robot.commands.EncoderReader;
@@ -184,7 +185,14 @@ public class Robot extends TimedRobot {
     System.out.println("autoLarga_On");
 
       al.schedule();
+
+    /*AutoTry at = new AutoTry();
+    System.out.println("autoTry_On");
+
+      at.schedule();*/
     
+
+
 
    /* if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();

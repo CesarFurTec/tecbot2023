@@ -28,7 +28,7 @@ public static final double chassisSpeedL = 0.3;
 
 public static final double chassisSpeedR = 0.3;
 
-public static final double autonomusSpeed = 0.25;
+public static final double autonomusSpeed = 0.6;
 
 public static final double armSpeedB = 1;
 

@@ -67,7 +67,7 @@ public class AutoLarga extends SequentialCommandGroup {
     new WaitCommand(0.3),*/
 
     new DriveDistance(12.7, -1, 12.7, -1),
-    new WaitCommand(0.1)
+    new WaitCommand(0.3)
 
 
 

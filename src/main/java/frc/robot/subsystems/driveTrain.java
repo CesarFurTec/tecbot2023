@@ -35,6 +35,8 @@ public class driveTrain extends SubsystemBase {
   TecbotSpeedController m3;
   TecbotSpeedController m4; 
   boolean leftSideBalanced = false, rightSideBalanced = false;
+
+  double minAutoSpeed = 0.2;
   
 
 
@@ -126,9 +128,13 @@ public class driveTrain extends SubsystemBase {
      m4.set(outputSpeed*dir); 
     }
 
+
+
   public boolean moveWithEncodersL (double current, double max, double dir)
   {
-    double slowDown = Math.abs(max/(current+0.0001));
+    double slowDown = Math.abs(1-(Math.abs(current/((max*2)+0.000001))));
+    if(slowDown>1){slowDown=1;}
+    if(slowDown<minAutoSpeed){slowDown=minAutoSpeed;}
 
     System.out.println("current:"+ current + "max"+ max);
     if(dir == 1)
@@ -176,7 +182,9 @@ public class driveTrain extends SubsystemBase {
 
   public boolean moveWithEncodersL2 (double current, double max, double dir)
   {
-    double slowDown = Math.abs(max/(current+0.0001));
+    double slowDown = Math.abs(1-(Math.abs(current/((max*2)+0.000001))));
+    if(slowDown>1){slowDown=1;}
+    if(slowDown<minAutoSpeed){slowDown=minAutoSpeed;}
 
     System.out.println("current:"+ current + "max"+ max);
     if(dir == 1)
@@ -220,7 +228,10 @@ public class driveTrain extends SubsystemBase {
   public boolean moveWithEncodersR (double current, double max, double dir)
   {
     
-    double slowDown = Math.abs(max/(current+0.0001));
+    double slowDown = Math.abs(1-(Math.abs(current/((max*2)+0.000001))));
+    if(slowDown>1){slowDown=1;}
+    if(slowDown<minAutoSpeed){slowDown=minAutoSpeed;}
+
     System.out.println("current:"+ current + "max"+ max);
     if(dir == 1)
     {
@@ -259,8 +270,10 @@ public class driveTrain extends SubsystemBase {
 
   public boolean moveWithEncodersR2 (double current, double max, double dir)
   {
-    double slowDown = Math.abs(max/(current+0.0001));
-    
+    double slowDown = Math.abs(1-(Math.abs(current/((max*2)+0.000001))));
+    if(slowDown>1){slowDown=1;}
+    if(slowDown<minAutoSpeed){slowDown=minAutoSpeed;}
+
     System.out.println("current:"+ current + "max"+ max);
     if(dir == 1)
     {

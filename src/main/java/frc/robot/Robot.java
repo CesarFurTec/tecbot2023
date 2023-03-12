@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -49,6 +50,8 @@ import edu.wpi.first.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.MjpegServer;
 
+
+
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -58,6 +61,11 @@ import edu.wpi.first.cscore.MjpegServer;
 public class Robot extends TimedRobot {
   private static RobotContainer robotcontainer;
   private Command m_autonomousCommand;
+  private static final String AUTOCORTA_STRING = "Auto Corta";
+  private static final String AUTOLARGA_STRING = "Auto Larga";
+  private static final String AUTOMEDIA_DEFAULT_STRING = "Auto Media";
+  private String m_autoSelected;
+  private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
 
   /**
@@ -70,6 +78,11 @@ public class Robot extends TimedRobot {
     robotcontainer = new RobotContainer();
     robotcontainer.configureButtonBindings();
     cameraRetake();
+    m_chooser.setDefaultOption("Auto Media", AUTOMEDIA_DEFAULT_STRING);
+    m_chooser.addOption("Auto Larga", AUTOLARGA_STRING);
+    m_chooser.addOption("Auto Corta", AUTOCORTA_STRING);
+    SmartDashboard.putData("Auto choices", m_chooser);
+    SmartDashboard.putString("Recordatorio", "View > Add > Camera Server Stream Viewer");
    
   }
   public static RobotContainer getRobotContainer() {
@@ -90,7 +103,7 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
-    SmartDashboard.putNumber("angle", Navx.getGyro());
+    //SmartDashboard.putNumber("angle", Navx.getGyro());
     
   }
 
@@ -107,9 +120,13 @@ public class Robot extends TimedRobot {
     m_autonomousCommand = robotcontainer.getAutonomousCommand();
     
 
+    m_autoSelected = m_chooser.getSelected();
+    System.out.println("Auto selected: " + m_autoSelected);
+    /* 
     AutoLarga auto_larga = new AutoLarga();
     System.out.println("autoLarga_On");
     auto_larga.schedule();
+    */
 
     /* 
     AutoCorta auto_corta = new AutoCorta();
@@ -130,6 +147,24 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
+    switch (m_autoSelected) {
+      case AUTOCORTA_STRING:
+        AutoCorta auto_corta = new AutoCorta();
+        System.out.println("autoCorta_On");
+        auto_corta.schedule();
+        break;
+      case AUTOLARGA_STRING:
+        AutoLarga auto_larga = new AutoLarga();
+        System.out.println("autoLarga_On");
+        auto_larga.schedule();
+        break;
+      case AUTOMEDIA_DEFAULT_STRING:
+      default:
+        AutoArm auto_media = new AutoArm();
+        System.out.println("autoMedia_On");
+        auto_media.schedule(); 
+        break;
+    }
   }
 
   @Override

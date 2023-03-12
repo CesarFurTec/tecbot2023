@@ -38,11 +38,7 @@ public class OI {
 
    public void configureButtonBindings(){
       
-     /* Regina.whenPressed(TecbotController.ButtonType.A, new OnArmT());
-      Regina.whenPressed(TecbotController.ButtonType.B, new OffArm());
-      Regina.whenPressed(TecbotController.ButtonType.X, new ChangeToSpeed());
-      Regina.whenPressed(TecbotController.ButtonType.Y, new ChangeToTorque());
-*/
+
      Regina.whenPressed(TecbotController.ButtonType.A, new IntakeOn());   //este abre
       Regina.whenPressed(TecbotController.ButtonType.B, new IntakeOff());   // este cierra
       Regina.whenPressed(TecbotController.ButtonType.X, new ExtendArm());   //extiende
@@ -55,8 +51,7 @@ public class OI {
 
       Mario.whenPressed(TecbotController.ButtonType.A, new OnArmT()); // x   ////  este baja
       Mario.whenPressed(TecbotController.ButtonType.B, new OffArm()); // o   //// este sube
-     // Mario.whileHeld(TecbotController.ButtonType.X, new ChangeToSpeed()); // []
-     // Mario.whileHeld(TecbotController.ButtonType.Y, new ChangeToTorque()); // A
+
    }
 
    public static OI getInstance() {

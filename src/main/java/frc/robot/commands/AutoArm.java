@@ -23,53 +23,22 @@ public class AutoArm extends SequentialCommandGroup {
       //new IntakeOff()  cerrar 
       // new ExtendArm() extender
       // new RetractArm()  retraer
-      //new IntakeOff(),
 
+      //////////////////////////////////////////////// AUTONOMO CENTRO  ////////////////////////////////////////////////////////////
 
-      new OffArm(),
-      new WaitCommand(0.8),
-      new ExtendArm(),
-      new WaitCommand(0.8),
-      new IntakeOn(),
-      new WaitCommand(0.5),
-      new RetractArm(),
-      new WaitCommand(0.5),
-      new OnArmT(),
-      new WaitCommand(0.3),
-      new DriveDistance(9.5, -1, 9.5, -1)
+      new OffArm(),    //sube brazo
+    new WaitCommand(0.8),
+    new ExtendArm(),  //extiende brazo
+    new WaitCommand(0.8),
+    new IntakeOn(),  //abre y suelta
+    new WaitCommand(0.5),
+    new RetractArm(),  //retrae brazo
+    new WaitCommand(0.5),
+    new OnArmT(),  //baja brazo
+    new WaitCommand(0.3),
+    new DriveDistance(9.5, -1, 9.5, -1)   //retrocede 9.5 pies
      
-      /*new ResetEncoderDt(),
-      new WaitCommand(0.3),
-      
-      new DriveDistance(6, -1, 6, -1),
-      new WaitCommand(0.3),
-      new DriveDistance(15, 1, 15, 1), 
-      new WaitCommand(0.3),
-      new IntakeOff(),
-      new WaitCommand(0.3),
-      new DriveDistance(-5, 1, 5, 1),
-      new WaitCommand(0.3),
-      new DriveDistance(10, 1, 10, 1),
-      new WaitCommand(0.3),
-      new DriveDistance(3, -1, 3, -1),
-      new WaitCommand(0.3),
-      new OffArm(),
-      new WaitCommand(0.3),
-      new ExtendArm(),
-      new DriveDistance(-9, 1, 9, 1),
-      new WaitCommand(0.3),
-      new DriveDistance(12, 1, 12, 1)*/
-    
-      /*new DriveDistance(4, 1, 4, 1),
-      new WaitCommand(0.3),
-      new DriveDistance(5, -1, 5, -1),
-      new WaitCommand(0.3),*/
-      
-      
-      /*new DriveDistance(12, 1, -6, 1),
-      new WaitCommand(0.3),
-      new DriveDistance(-12, 1, 24, 1),
-      new WaitCommand(0.3)*/
+
 
     );
 

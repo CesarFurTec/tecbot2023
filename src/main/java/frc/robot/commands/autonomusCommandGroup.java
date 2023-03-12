@@ -24,13 +24,13 @@ public class autonomusCommandGroup extends SequentialCommandGroup {
       new WaitCommand(3.2), 
       new OffMotors(), 
       new WaitCommand(1), 
-      new turnLeftDriveTrain(), 
+      //new turnLeftDriveTrain(), 
       new WaitCommand(1.0), 
       new onMotors(), 
       new WaitCommand(3.6), 
       new OffMotors(), 
       new WaitCommand(1), 
-      new turnLeftDriveTrain(),
+      //new turnLeftDriveTrain(),
        new WaitCommand(1.0));
       x++; 
     }

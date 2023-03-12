@@ -14,6 +14,6 @@ public class TurnLeftDTE extends SequentialCommandGroup {
   public TurnLeftDTE() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new ResetEncoderDt(), new turnLeftDriveTrain());
+    addCommands(new ResetEncoderDt(), new turnLeftDriveTrain(6));
   }
 }

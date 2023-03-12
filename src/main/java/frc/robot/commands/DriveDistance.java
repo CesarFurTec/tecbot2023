@@ -15,7 +15,6 @@ public class DriveDistance extends CommandBase {
   public DriveDistance(double dL,  int dirL, double dR, int dirR) {
     addRequirements(Robot.getRobotContainer().getDriveTrain());
      distanceL = dL;
-     //threshold = t;
      distanceR = dR;
      directionL = dirL;
      directionR = dirR;
@@ -35,7 +34,7 @@ public class DriveDistance extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //double actualDistance = distance - (Math.abs(Robot.getRobotContainer().getDriveTrain().getDriveTrainFeet())); //=error
+
     double actualDistanceL =  (Robot.getRobotContainer().getDriveTrain().getDriveTrainFeetL());
     double actualDistanceR =  (Robot.getRobotContainer().getDriveTrain().getDriveTrainFeetR());
     double actualDistanceL2 =  (Robot.getRobotContainer().getDriveTrain().getDriveTrainFeetL2());
@@ -56,21 +55,6 @@ public class DriveDistance extends CommandBase {
     else {
       finished=false;
     }
-    /*Robot.getRobotContainer().getDriveTrain().driveWithEncoders(distance, direction);
-    System.out.println("actualDistance : " + actualDistance + " | threshold : " + threshold + "  | distance: " + distance);
-
-      if((Math.abs( actualDistance )) < (threshold) )
-       {
-        System.out.println("finished >");
-        finished = true;
-      }
-
-      if((Math.abs( actualDistance )) == 0) 
-       {
-        System.out.println("finished >");
-        finished = true;
-      }*/
-
     
   }
 

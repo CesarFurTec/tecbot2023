@@ -11,9 +11,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.ArmEncoder;
 import frc.robot.commands.AutoMonterrey01;
-import frc.robot.commands.AutomousGoAndReturn;
-import frc.robot.commands.AutonomousRoute;
-import frc.robot.commands.AutonomousSequence1;
 import frc.robot.commands.EncoderArmBackwards;
 import frc.robot.commands.GetArmAngleL;
 import frc.robot.commands.GoUpChargedStation;
@@ -33,7 +30,6 @@ import frc.robot.commands.driveRobot;
 import frc.robot.commands.AutoArm;
 import frc.robot.commands.AutoCorta;
 import frc.robot.commands.AutoLarga;
-import frc.robot.commands.AutoTry;
 import frc.robot.commands.CameraCommand;
 import frc.robot.commands.onMotors;
 import frc.robot.commands.EncoderReader;
@@ -70,37 +66,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
-    // autonomous chooser on the dashboard.
+
     robotcontainer = new RobotContainer();
     robotcontainer.configureButtonBindings();
     cameraRetake();
-    //CameraServer.startAutomaticCapture();
-
-
-    ///////////////////////////////////////////////////////////////////////////
-    /*new Thread(() -> {
-      //UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-      UsbCamera camera = CameraServer.startAutomaticCapture();
-      camera.setResolution(640, 480);
-
-      //CvSink cvSink = CameraServer.getInstance().getVideo();
-      CvSink cvSink = CameraServer.getVideo();
-      
-      //CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
-
-      CvSource outputStream = CameraServer.putVideo("Blur", 640, 480);
-
-      Mat source = new Mat();
-      Mat output = new Mat();
-
-      while(!Thread.interrupted()) {
-          cvSink.grabFrame(source);
-          Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
-          outputStream.putFrame(output);
-      }
-  }).start(); */
-  ///////////////////////////////////////
    
   }
   public static RobotContainer getRobotContainer() {
@@ -136,67 +105,25 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = robotcontainer.getAutonomousCommand();
-    //m_robotContainer.getDriveTrain().setDefaultCommand(new turnLeftDriveTrain());  
-    // schedule the autonomous command (example)
     
-    /*autonomusCommandGroup a = new autonomusCommandGroup();
-    AutomousGoAndReturn a1 = new AutomousGoAndReturn();
-    OnArm a2 = new OnArm();
-    GoUpChargedStation a3 = new GoUpChargedStation();
-    IntakeOn a4 = new IntakeOn();
-    IntakeOff a5 = new IntakeOff();
-    OpenAndCloseClaw a6 = new OpenAndCloseClaw();
-    AutonomousRoute a7 = new AutonomousRoute();
-    ReturnRobot a8 = new ReturnRobot();
-    turnLeftDriveTrain a9 = new turnLeftDriveTrain();
-    OnArm a10 = new OnArm();
-    ArmEncoder a11 = new ArmEncoder();
-    EncoderArmBackwards a12 = new EncoderArmBackwards();
 
-    AutoArm aa= new AutoArm();
-    
-    ResetEncoderDt a13 = new ResetEncoderDt();
-    TurnLeftDTE a14 = new TurnLeftDTE();
-    AutonomousSequence1 a15 = new AutonomousSequence1();*/
-
-
-
-   // onMotors xd = new onMotors();
-
-    /*AutoMonterrey01 auto_mty = new AutoMonterrey01();
-    System.out.println(" auto_mty");
-    
-      auto_mty.schedule();
-      */
-
-
-    /*AutoArm aa= new AutoArm();
-    System.out.println("autoArm_on");
-
-      aa.schedule();*/
-      
-    /*AutoCorta ac = new AutoCorta();
-    System.out.println("autoCorta_On");
-
-      ac.schedule();*/
-
-
-    AutoLarga al = new AutoLarga();
+    AutoLarga auto_larga = new AutoLarga();
     System.out.println("autoLarga_On");
+    auto_larga.schedule();
 
-      al.schedule();
+    /* 
+    AutoCorta auto_corta = new AutoCorta();
+    System.out.println("autoCorta_On");
+    auto_corta.schedule();
+    */
 
-    /*AutoTry at = new AutoTry();
-    System.out.println("autoTry_On");
+    /* 
+    AutoArm auto_media = new AutoArm();
+    System.out.println("autoMedia_On");
+    auto_media.schedule(); 
+    */
 
-      at.schedule();*/
-    
 
-
-
-   /* if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
-    }*/
 
   }
 
@@ -207,26 +134,19 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to
-    // continue until interrupted by another command, remove
-    // this line or comment it out.
     driveRetake();
   }
 
   public static void cameraRetake()
   {
     new Thread(() -> {
-      //UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+
       UsbCamera camera = CameraServer.startAutomaticCapture();
       camera.setResolution(320, 240);
       camera.setWhiteBalanceAuto();
       camera.setFPS(12);
 
-      //CvSink cvSink = CameraServer.getInstance().getVideo();
       CvSink cvSink = CameraServer.getVideo();
-      
-      //CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
 
       CvSource outputStream = CameraServer.putVideo("Blur", 320, 240);
 
@@ -243,10 +163,9 @@ public class Robot extends TimedRobot {
 
   public static void driveRetake()
   {
-    //cameraRetake();
+
     driveRobot t2 = new driveRobot();
     
-    //Camera camera = new Camera();
    
 
     t2.schedule();
@@ -256,8 +175,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    /*EncoderReader encoder_reader = new EncoderReader();
-    encoder_reader.schedule();*/
+
 
   }
   

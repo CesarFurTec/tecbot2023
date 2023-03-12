@@ -12,25 +12,46 @@ import frc.robot.resources.TecbotConstants;
 public class turnLeftDriveTrain extends CommandBase {
   /** Creates a new trunLeft. */
   boolean finished = false;
+  double distanceL, distanceR;
 
-  public turnLeftDriveTrain() {
-    // Use addRequirements() here to declare subsystem dependencies.
+  public turnLeftDriveTrain(double dis) {
     addRequirements(Robot.getRobotContainer().getDriveTrain());
+     distanceL = -dis;
+     distanceR = dis;
+     //new DriveDistance(-3.6, 1, 3.6, 1),    IZQ
+     //new DriveDistance(3.7, 1, -3.7, 1),  DER
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    Robot.getRobotContainer().getDriveTrain().resetEncoderDt();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() { 
-    Robot.getRobotContainer().getDriveTrain().turnLeft();
-    double distance = TecbotConstants.setpointTurn - Robot.getRobotContainer().getDriveTrain().getDriveTrainFeetL();
+    double actualDistanceL =  (Robot.getRobotContainer().getDriveTrain().getDriveTrainFeetL());
+    double actualDistanceR =  (Robot.getRobotContainer().getDriveTrain().getDriveTrainFeetR());
+    double actualDistanceL2 =  (Robot.getRobotContainer().getDriveTrain().getDriveTrainFeetL2());
+    double actualDistanceR2 =  (Robot.getRobotContainer().getDriveTrain().getDriveTrainFeetR2());
+
+    boolean a,b,c,d;
+      a = Robot.getRobotContainer().getDriveTrain().moveWithEncodersL(actualDistanceL, distanceL, 1);
+      b = Robot.getRobotContainer().getDriveTrain().moveWithEncodersR(actualDistanceR, distanceR, 1); 
+      c = Robot.getRobotContainer().getDriveTrain().moveWithEncodersL2(actualDistanceL2, distanceL, 1);
+      d = Robot.getRobotContainer().getDriveTrain().moveWithEncodersR2(actualDistanceR2, distanceR, 1);
+
+
+   
+
+    if (a && b && c && d){
+      finished= true;
+  }
+    else {
+      finished=false;
+    }
     
-    if(distance*TecbotConstants.kP <= 0.03);
-    finished = true;
    }
    
 

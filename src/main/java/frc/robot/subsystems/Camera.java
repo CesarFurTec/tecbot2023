@@ -21,7 +21,7 @@ import edu.wpi.first.cscore.CvSource;
 
 import edu.wpi.first.cscore.UsbCamera;
 
-//import edu.wpi.first.wpilibj.CameraServer;
+
 
 public class Camera extends SubsystemBase {
   /** Creates a new Camera. */
@@ -50,14 +50,10 @@ mjpegServer2.setSource(outputStream);
   public void startCamera2()
   {
     new Thread(() -> {
-      //UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+
       UsbCamera camera = CameraServer.startAutomaticCapture();
       camera.setResolution(640, 480);
-
-      //CvSink cvSink = CameraServer.getInstance().getVideo();
       CvSink cvSink = CameraServer.getVideo();
-      
-      //CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
 
       CvSource outputStream = CameraServer.putVideo("Blur", 640, 480);
 

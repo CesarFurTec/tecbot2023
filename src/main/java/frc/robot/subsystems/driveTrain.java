@@ -136,43 +136,26 @@ public class driveTrain extends SubsystemBase {
     if(slowDown>1){slowDown=1;}
     if(slowDown<minAutoSpeed){slowDown=minAutoSpeed;}
 
-    System.out.println("current:"+ current + "max"+ max);
     if(dir == 1)
     {
       if(current >= max - 1)
       {
-        System.out.println(" FRONT  FRONT  STOP STOP STOP");
         m1.set(0);
-        //m2.set(0);
-        //m3.set(0);
-        //m4.set(0); 
         return true;
       }else
       {
-        System.out.println("////////////////////////  FRONT  ////////////////////////////////");
         m1.set(-RobotMap.autonomusSpeed*slowDown);
-        //m2.set(-RobotMap.chassisSpeedL); 
-        //m3.(RobotMap.chassisSpeedL);
-        //m4.set(RobotMap.chassisSpeedL); 
         return false;
       }
     }else if(dir == -1)
     {
       if(current <= (max * dir) + 1)
       {
-        System.out.println("BACK  BACK   STOP STOP STOP");
         m1.set(0);
-        //m2.set(0);
-        //m3.set(0);
-        //m4.set(0);
         return true; 
       }else
       {
-        System.out.println("////////////////////  BACK   ///////////////////////");
         m1.set(RobotMap.autonomusSpeed*slowDown);
-        //m2.set(RobotMap.chassisSpeedL); 
-        //m3.set(-RobotMap.chassisSpeedL);
-        //m4.set(-RobotMap.chassisSpeedL); 
         return false;
       }
     }
@@ -186,18 +169,16 @@ public class driveTrain extends SubsystemBase {
     if(slowDown>1){slowDown=1;}
     if(slowDown<minAutoSpeed){slowDown=minAutoSpeed;}
 
-    System.out.println("current:"+ current + "max"+ max);
     if(dir == 1)
     {
       if(current >= max - 1)
       {
-        System.out.println(" FRONT  FRONT  STOP STOP STOP");
+ 
         m2.set(0);
       
         return true;
       }else
       {
-        System.out.println("////////////////////////  FRONT  ////////////////////////////////");
        
         m2.set(-RobotMap.autonomusSpeed*slowDown); 
          
@@ -207,14 +188,12 @@ public class driveTrain extends SubsystemBase {
     {
       if(current <= (max * dir) + 1)
       {
-        System.out.println("BACK  BACK   STOP STOP STOP");
         
         m2.set(0);
         
         return true; 
       }else
       {
-        System.out.println("////////////////////  BACK   ///////////////////////");
         
         m2.set(RobotMap.autonomusSpeed*slowDown); 
         
@@ -232,35 +211,26 @@ public class driveTrain extends SubsystemBase {
     if(slowDown>1){slowDown=1;}
     if(slowDown<minAutoSpeed){slowDown=minAutoSpeed;}
 
-    System.out.println("current:"+ current + "max"+ max);
     if(dir == 1)
     {
       if(current >= max - 1)
       {
-        System.out.println(" FRONT  FRONT  STOP STOP STOP");
         m3.set(0);
-        //m4.set(0); 
         return true;
       }else
       {
-        System.out.println("////////////////////////  FRONT  ////////////////////////////////");
         m3.set(RobotMap.autonomusSpeed*slowDown);
-        //m4.set(RobotMap.chassisSpeedL); 
         return false;
       }
     }else if(dir == -1)
     {
       if(current <= (max * dir) + 1)
       {
-        System.out.println("BACK  BACK   STOP STOP STOP");
         m3.set(0);
-        //m4.set(0);
         return true; 
       }else
       {
-        System.out.println("////////////////////  BACK   ///////////////////////");
         m3.set(-RobotMap.autonomusSpeed*slowDown);
-        //m4.set(-RobotMap.chassisSpeedL); 
         return false;
       }
     }
@@ -274,17 +244,14 @@ public class driveTrain extends SubsystemBase {
     if(slowDown>1){slowDown=1;}
     if(slowDown<minAutoSpeed){slowDown=minAutoSpeed;}
 
-    System.out.println("current:"+ current + "max"+ max);
     if(dir == 1)
     {
       if(current >= max - 1)
       {
-        System.out.println(" FRONT  FRONT  STOP STOP STOP");
         m4.set(0); 
         return true;
       }else
       {
-        System.out.println("////////////////////////  FRONT  ////////////////////////////////");
 
         m4.set(RobotMap.autonomusSpeed*slowDown); 
 
@@ -294,13 +261,11 @@ public class driveTrain extends SubsystemBase {
     {
       if(current <= (max * dir) + 1)
       {
-        System.out.println("BACK  BACK   STOP STOP STOP");
         
         m4.set(0);
         return true; 
       }else
       {
-        System.out.println("////////////////////  BACK   ///////////////////////");
         
         m4.set(-RobotMap.autonomusSpeed*slowDown); 
         return false;
@@ -318,7 +283,6 @@ public class driveTrain extends SubsystemBase {
   
     double error = TecbotConstants.setpointShort - sensorPosition;
   
-    System.out.println("distance: " + TecbotConstants.setpoint);
   
     double outputSpeed = TecbotConstants.kP*error/TecbotConstants.setpoint;
   
@@ -345,7 +309,6 @@ public class driveTrain extends SubsystemBase {
   }
   
   public double getDriveTrainFeetR(){
-    //return driveTrainEncoderR1.getPosition();
     return  driveTrainEncoderR1.getPosition() * TecbotConstants.kDriveTick2Feet;
   }
 
@@ -354,7 +317,6 @@ public class driveTrain extends SubsystemBase {
    }
    
    public double getDriveTrainFeetR2(){
-     //return driveTrainEncoderR1.getPosition();
      return  driveTrainEncoderR2.getPosition() * TecbotConstants.kDriveTick2Feet;
    }
 
@@ -387,10 +349,7 @@ public class driveTrain extends SubsystemBase {
     m4.set(0);
   }
   
- // public boolean hasElapsed (double sec) {
-    //sec = 1.5;
-//return t.get() >= sec;
- //}
+
   public void turnLeft(){
     double sensorPostionTurn = driveTrainEncoderL1.getPosition()*TecbotConstants.kDriveTick2Feet;
 
@@ -403,16 +362,6 @@ public class driveTrain extends SubsystemBase {
     SmartDashboard.putNumber("error: ", errorTurn);
     SmartDashboard.putNumber("output speed: ", outputSpeedTurn);
 
-    System.out.println("Encoder Position: " + sensorPostionTurn);
-    System.out.println("setpoint: " + TecbotConstants.setpointTurn);
-    System.out.println("error: " + errorTurn);
-    System.out.println("output speed: " + outputSpeedTurn);
-    
-
-    //m1.set(outputSpeedTurn);
-    //m2.set(outputSpeedTurn); 
-    //m3.set(outputSpeedTurn);
-    //m4.set(outputSpeedTurn); 
   }
 
   public void turnRight(){
@@ -433,23 +382,6 @@ public class driveTrain extends SubsystemBase {
     m4.set(-outputSpeedTurn);
   }
 
-  /*public void turn45(){
-    double sensorPositionTurn = (-1*driveTrainEncoderR1.getPosition()) * TecbotConstants.kDriveTick2Feet;
-
-   // double angleGet = sensorPositionTurn/45;
-
-    double errorTurn = TecbotConstants.setpointTurnR - sensorPositionTurn;
-
-    double outputSpeedTurn = TecbotConstants.kP*errorTurn/TecbotConstants.setpointTurn;
-
-    m1.set(-outputSpeedTurn);
-    m2.set(-outputSpeedTurn); 
-    m3.set(-outputSpeedTurn);
-    m4.set(-outputSpeedTurn);
-  } 
-  */
-
-  //Nota de que solo hay que modificar el setpoint -_-
 
   public void drive(double x, double y){
     Robot.getRobotContainer().getOI().getPilot().setOffset(RobotMap.OFFSET);

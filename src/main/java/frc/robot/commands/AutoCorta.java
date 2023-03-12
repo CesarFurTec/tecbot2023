@@ -15,64 +15,52 @@ public class AutoCorta extends SequentialCommandGroup {
   public AutoCorta() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
+    //new OnArmT()   levantar
+      //new OffArm()   bajar
+      // new IntakeOn()  abrir 
+      //new IntakeOff()  cerrar 
+      // new ExtendArm() extender
+      // new RetractArm()  retraer
     addCommands(
 
-    new OffArm(),
+    //////////////////////////////////////////////// AUTONOMO CORTA  ////////////////////////////////////////////////////////////
+
+    new OffArm(),    //sube brazo
     new WaitCommand(0.8),
-    new ExtendArm(),
+    new ExtendArm(),  //extiende brazo
     new WaitCommand(0.8),
-    new IntakeOn(),
+    new IntakeOn(),  //abre y suelta
     new WaitCommand(0.5),
-    new RetractArm(),
+    new RetractArm(),  //retrae brazo
     new WaitCommand(0.5),
-    new OnArmT(),
+    new OnArmT(),  //baja brazo
     new WaitCommand(0.3),
-    new DriveDistance(18, -1, 18, -1),
-    new WaitCommand(0.3),
-    //new DriveDistance(-5.7, 1, 5.7, 1),
-
-    new DriveDistance(-3.6, 1, 3.6, 1),
-    new WaitCommand(0.3),
-    new DriveDistance(2, -1, 2, -1),
-    new WaitCommand(0.3),
-    new DriveDistance(-3.6, 1, 3.6, 1),
+    new DriveDistance(18, -1, 18, -1),   //retrocede 18 pies
     new WaitCommand(0.3),
 
-    new DriveDistance(1.5, 1, 1.5, 1),
+    //new DriveDistance(-3.6, 1, 3.6, 1),
+    new turnLeftDriveTrain(3.6),   //vuelta a la izquierda de 45 grados
+    new WaitCommand(0.3),
+    new DriveDistance(2, -1, 2, -1),   //retrocede 2 pies para prepararse para mas  vuelta
+    new WaitCommand(0.3),
+    //new DriveDistance(-3.6, 1, 3.6, 1),
+    new turnLeftDriveTrain(3.6),  //vuelta a la izquierda de 45 grados
     new WaitCommand(0.3),
 
-    /*new IntakeOn(),
+    new DriveDistance(4, 1, 4, 1),    //avanza a altura de charge station
     new WaitCommand(0.3),
-    new IntakeOff(),*/
     
-    new DriveDistance(2, 1, 2, 1),
+    //new DriveDistance(-3.6, 1, 3.6, 1),
+    new turnLeftDriveTrain(3.6),  //vuelta a la izquierda de 45 grados
+    new WaitCommand(0.3),
+    new DriveDistance(2, -1, 2, -1),    //retrocede 2 pies para prepararse para mas  vuelta
+    new WaitCommand(0.3),
+    //new DriveDistance(-3.9, 1, 3.9, 1),
+    new turnLeftDriveTrain(3.6),   //vuelta a la izquierda de 45 grados
+    new WaitCommand(0.3),
 
-    new DriveDistance(-3.6, 1, 3.6, 1),
-    new WaitCommand(0.3),
-    new DriveDistance(2, -1, 2, -1),
-    new WaitCommand(0.3),
-    new DriveDistance(-3.9, 1, 3.9, 1),
-    new WaitCommand(0.3),
-
-    /*new DriveDistance(-2, 1, 2, 1),
-    new WaitCommand(0.3),
-    new DriveDistance(1.1, -1, 1.1, -1),
-    new WaitCommand(0.3),
-    new DriveDistance(-2, 1, 2, 1),
-    new WaitCommand(0.3),
-    new DriveDistance(1.1, 1, 1.1, 1),
-    new WaitCommand(0.3),
-    new DriveDistance(-2, 1, 2, 1),
-    new WaitCommand(0.3),
-    new DriveDistance(1.1, -1, 1.1, -1),
-    new WaitCommand(0.3),*/
-
-    new DriveDistance(13, -1, 13, -1),
+    new DriveDistance(13, -1, 13, -1),  //sube a charge station, es preferible subir y bajarnos del otro lado que  quedarnos a medias
     new WaitCommand(0.3)
-
-
-
-
 
 
     );

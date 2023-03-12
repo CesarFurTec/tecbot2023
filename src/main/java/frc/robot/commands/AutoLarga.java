@@ -17,6 +17,8 @@ public class AutoLarga extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
 
+    //////////////////////////////////////////////// AUTONOMO LARGA  ////////////////////////////////////////////////////////////
+
     new OffArm(),
     new WaitCommand(0.8),
     new ExtendArm(),
@@ -27,52 +29,32 @@ public class AutoLarga extends SequentialCommandGroup {
     new WaitCommand(0.5),
     new OnArmT(),
     new WaitCommand(0.3),
-    new DriveDistance(18, -1, 18, -1),
+    new DriveDistance(18, -1, 18, -1),    //retrocede 18 pies
     new WaitCommand(0.3),
-    //new DriveDistance(-5.7, 1, 5.7, 1),
 
-    new DriveDistance(3.7, 1, -3.7, 1),
+    //new DriveDistance(3.7, 1, -3.7, 1),
+    new TurnRightDriveTrain(3.7),  //vuelta a la derecha de 45 grados
     new WaitCommand(0.1),
-    new DriveDistance(2, -1, 2, -1),
+    new DriveDistance(2, -1, 2, -1),   //retrocede 2 pies para prepararse para mas  vuelta
     new WaitCommand(0.1),
-    new DriveDistance(3.7, 1, -3.7, 1),
-    new WaitCommand(0.1),
-
-    new DriveDistance(4.5, 1, 4.7, 1),
+    //new DriveDistance(3.7, 1, -3.7, 1),
+    new TurnRightDriveTrain(3.7),       //vuelta a la derecha de 45 grados
     new WaitCommand(0.1),
 
-    /*new IntakeOn(),
-    new WaitCommand(0.3),
-    new IntakeOff(),*/
-    
+    new DriveDistance(4.5, 1, 4.7, 1),   //avanza a altura de charge station
+    new WaitCommand(0.1),
   
-    new DriveDistance(3.7, 1, -3.7, 1),
+    //new DriveDistance(3.7, 1, -3.7, 1),
+    new TurnRightDriveTrain(3.7),       //vuelta a la derecha de 45 grados
     new WaitCommand(0.1),
-    new DriveDistance(2, -1, 2, -1),
+    new DriveDistance(2, -1, 2, -1),  //retrocede 2 pies para prepararse para mas  vuelta
     new WaitCommand(0.1),
-    new DriveDistance(3.7, 1, -3.7, 1),
+    new TurnRightDriveTrain(3.7),       //vuelta a la derecha de 45 grados
+   // new DriveDistance(3.7, 1, -3.7, 1),
     new WaitCommand(0.1),
 
-    /*new DriveDistance(-2, 1, 2, 1),
-    new WaitCommand(0.3),
-    new DriveDistance(1.1, -1, 1.1, -1),
-    new WaitCommand(0.3),
-    new DriveDistance(-2, 1, 2, 1),
-    new WaitCommand(0.3),
-    new DriveDistance(1.1, 1, 1.1, 1),
-    new WaitCommand(0.3),
-    new DriveDistance(-2, 1, 2, 1),
-    new WaitCommand(0.3),
-    new DriveDistance(1.1, -1, 1.1, -1),
-    new WaitCommand(0.3),*/
-
-    new DriveDistance(12.7, -1, 12.7, -1),
+    new DriveDistance(12.7, -1, 12.7, -1),  //sube a charge station, es preferible subir y bajarnos del otro lado que  quedarnos a medias
     new WaitCommand(0.3)
-
-
-
-
-
 
     );
   }

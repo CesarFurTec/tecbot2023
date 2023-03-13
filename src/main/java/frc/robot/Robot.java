@@ -121,7 +121,26 @@ public class Robot extends TimedRobot {
     
 
     m_autoSelected = m_chooser.getSelected();
-    System.out.println("Auto selected: " + m_autoSelected);
+
+    switch (m_autoSelected) {
+      case AUTOCORTA_STRING:
+        AutoCorta auto_corta = new AutoCorta();
+        System.out.println("autoCorta_On");
+        auto_corta.schedule();
+        break;
+      case AUTOLARGA_STRING:
+        AutoLarga auto_larga = new AutoLarga();
+        System.out.println("autoLarga_On");
+        auto_larga.schedule();
+        break;
+      case AUTOMEDIA_DEFAULT_STRING:
+      default:
+        AutoArm auto_media = new AutoArm();
+        System.out.println("autoMedia_On");
+        auto_media.schedule(); 
+        break;
+      }
+    
     /* 
     AutoLarga auto_larga = new AutoLarga();
     System.out.println("autoLarga_On");
@@ -147,6 +166,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
+    /* 
     switch (m_autoSelected) {
       case AUTOCORTA_STRING:
         AutoCorta auto_corta = new AutoCorta();
@@ -165,6 +185,7 @@ public class Robot extends TimedRobot {
         auto_media.schedule(); 
         break;
     }
+    */
   }
 
   @Override

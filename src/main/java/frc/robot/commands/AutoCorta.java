@@ -41,19 +41,19 @@ public class AutoCorta extends SequentialCommandGroup {
     //new DriveDistance(-3.6, 1, 3.6, 1),
     new turnLeftDriveTrain(3.6),   //vuelta a la izquierda de 45 grados
     new WaitCommand(0.3),
-    new DriveDistance(2, -1, 2, -1),   //retrocede 2 pies para prepararse para mas  vuelta
+    new DriveDistance(3, -1, 3, -1),   //retrocede 2 pies para prepararse para mas  vuelta
     new WaitCommand(0.3),
     //new DriveDistance(-3.6, 1, 3.6, 1),
     new turnLeftDriveTrain(3.6),  //vuelta a la izquierda de 45 grados
     new WaitCommand(0.3),
 
-    new DriveDistance(4, 1, 4, 1),    //avanza a altura de charge station
+    new DriveDistance(3, 1, 3, 1),    //avanza a altura de charge station
     new WaitCommand(0.3),
     
     //new DriveDistance(-3.6, 1, 3.6, 1),
     new turnLeftDriveTrain(3.6),  //vuelta a la izquierda de 45 grados
     new WaitCommand(0.3),
-    new DriveDistance(2, -1, 2, -1),    //retrocede 2 pies para prepararse para mas  vuelta
+    new DriveDistance(3, -1, 3, -1),    //retrocede 2 pies para prepararse para mas  vuelta
     new WaitCommand(0.3),
     //new DriveDistance(-3.9, 1, 3.9, 1),
     new turnLeftDriveTrain(3.6),   //vuelta a la izquierda de 45 grados

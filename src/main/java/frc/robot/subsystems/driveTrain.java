@@ -387,10 +387,21 @@ public class driveTrain extends SubsystemBase {
     Robot.getRobotContainer().getOI().getPilot().setOffset(RobotMap.OFFSET);
     double rightSpeed = (-x - y);
     double leftSpeed = (-x + y);
-    m1.set(leftSpeed);
-    m2.set(leftSpeed);
-    m3.set(rightSpeed);
-    m4.set(rightSpeed);
+    double speedMultiplier = 1;
+
+    SmartDashboard.putNumber("Left speed: ", leftSpeed);
+    SmartDashboard.putNumber("Right speed: ", rightSpeed);
+
+    if(leftSpeed<0){
+      speedMultiplier = 2;
+    }
+
+    m1.set(leftSpeed * speedMultiplier); 
+    m2.set(leftSpeed * speedMultiplier);
+    m3.set(rightSpeed * speedMultiplier);
+    m4.set(rightSpeed * speedMultiplier);
+
+
   } 
 
   public void changeToSpeed(){

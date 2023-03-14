@@ -41,8 +41,7 @@ public class OI {
 
      Regina.whenPressed(TecbotController.ButtonType.A, new IntakeOn());   //este abre
       Regina.whenPressed(TecbotController.ButtonType.B, new IntakeOff());   // este cierra
-      Regina.whenPressed(TecbotController.ButtonType.X, new ExtendArm());   //extiende
-      Regina.whenPressed(TecbotController.ButtonType.Y, new RetractArm());  // retrae
+  // retrae
 
       Regina.whenPressed(TecbotController.ButtonType.LB, new ChangeToSpeed()); //Left Bumper
       Regina.whenPressed(TecbotController.ButtonType.RB, new ChangeToTorque()); //Right bumper
@@ -50,7 +49,9 @@ public class OI {
       
 
       Mario.whenPressed(TecbotController.ButtonType.A, new OnArmT()); // x   ////  este baja
-      Mario.whenPressed(TecbotController.ButtonType.B, new OffArm()); // o   //// este sube
+      Mario.whenPressed(TecbotController.ButtonType.B, new OffArm());
+      Mario.whenPressed(TecbotController.ButtonType.X, new ExtendArm());   //extiende
+      Mario.whenPressed(TecbotController.ButtonType.Y, new RetractArm()); // o   //// este sube
 
    }
 

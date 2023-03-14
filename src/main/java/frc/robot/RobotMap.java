@@ -24,11 +24,11 @@ public static final int pilotPort = 0;
 
 public static final int copilotPort = 1;
 
-public static final double chassisSpeedL = 0.3;
+public static final double chassisSpeedL = 0.5;
 
-public static final double chassisSpeedR = 0.3;
+public static final double chassisSpeedR = 0.5;
 
-public static final double autonomusSpeed = 0.6;
+public static final double autonomusSpeed = 0.28; // no mover
 
 public static final double armSpeedB = 1;
 

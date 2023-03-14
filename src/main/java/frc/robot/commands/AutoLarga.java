@@ -33,23 +33,23 @@ public class AutoLarga extends SequentialCommandGroup {
     new WaitCommand(0.3),
 
     //new DriveDistance(3.7, 1, -3.7, 1),
-    new TurnRightDriveTrain(3.7),  //vuelta a la derecha de 45 grados
+    new TurnRightDriveTrain(3.67),  //vuelta a la derecha de 45 grados
     new WaitCommand(0.1),
     new DriveDistance(2, -1, 2, -1),   //retrocede 2 pies para prepararse para mas  vuelta
     new WaitCommand(0.1),
     //new DriveDistance(3.7, 1, -3.7, 1),
-    new TurnRightDriveTrain(3.7),       //vuelta a la derecha de 45 grados
+    new TurnRightDriveTrain(3.67),       //vuelta a la derecha de 45 grados
     new WaitCommand(0.1),
 
-    new DriveDistance(4.5, 1, 4.7, 1),   //avanza a altura de charge station
+    new DriveDistance(3, 1, 3, 1),   //avanza a altura de charge station
     new WaitCommand(0.1),
   
     //new DriveDistance(3.7, 1, -3.7, 1),
-    new TurnRightDriveTrain(3.7),       //vuelta a la derecha de 45 grados
+    new TurnRightDriveTrain(3.67),       //vuelta a la derecha de 45 grados
     new WaitCommand(0.1),
     new DriveDistance(2, -1, 2, -1),  //retrocede 2 pies para prepararse para mas  vuelta
     new WaitCommand(0.1),
-    new TurnRightDriveTrain(3.7),       //vuelta a la derecha de 45 grados
+    new TurnRightDriveTrain(3.67),       //vuelta a la derecha de 45 grados
    // new DriveDistance(3.7, 1, -3.7, 1),
     new WaitCommand(0.1),
 

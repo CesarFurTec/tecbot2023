@@ -388,7 +388,7 @@ public class driveTrain extends SubsystemBase {
 
   public void drive(double x, double y){
     Robot.getRobotContainer().getOI().getPilot().setOffset(RobotMap.OFFSET);
-    double newX = (x*0.8);
+    double newX = (x*0.8); //0.7
     double rightSpeed = (-newX - y);
     double leftSpeed = (-newX + y);
     double speedMultiplier = 1;
@@ -396,10 +396,10 @@ public class driveTrain extends SubsystemBase {
   
 
     if(leftSpeed<0){
-      speedMultiplier = 1.8;
+      speedMultiplier = 1.8; //1.7
     }
     if(leftSpeed>0){
-      speedMultiplier = 0.99;
+      speedMultiplier = 0.99; //0.9
     }
 
     m1.set(leftSpeed * speedMultiplier); 

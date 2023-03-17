@@ -36,9 +36,9 @@ public class AutoArm extends SequentialCommandGroup {
     new WaitCommand(0.5),
     new OnArmT(),  //baja brazo
     new WaitCommand(0.3),
-    new DriveDistance(12, -1, 12, -1, true)   //retrocede 9.5 pies
+    new DriveDistance(14.9, -1, 14.9, -1, true)   //retrocede 9.5 pies
      
-
+      // estaba en 15.8, solution 15.45
 
     );
 

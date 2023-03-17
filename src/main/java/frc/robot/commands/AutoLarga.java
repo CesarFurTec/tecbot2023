@@ -29,7 +29,10 @@ public class AutoLarga extends SequentialCommandGroup {
     new WaitCommand(0.5),
     new OnArmT(),
     new WaitCommand(0.3),
-    new DriveDistance(18, -1, 18, -1),    //retrocede 18 pies
+    new DriveDistance(18, -1, 18, -1, false)    //retrocede 18 pies
+    //Edgar quiere 12
+    
+    /*
     new WaitCommand(0.3),
 
     //new DriveDistance(3.7, 1, -3.7, 1),
@@ -56,6 +59,7 @@ public class AutoLarga extends SequentialCommandGroup {
     new DriveDistance(12.7, -1, 12.7, -1),  //sube a charge station, es preferible subir y bajarnos del otro lado que  quedarnos a medias
     new WaitCommand(0.3)
 
+    */
     );
   }
 }

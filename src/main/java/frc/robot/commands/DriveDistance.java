@@ -6,18 +6,23 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class DriveDistance extends CommandBase {
   double distanceL, distanceR;
   int directionL, directionR;
   boolean finished;
+  boolean velChange;
+  double speed;
+
   /** Creates a new DriveDistance. */
-  public DriveDistance(double dL,  int dirL, double dR, int dirR) {
+  public DriveDistance(double dL,  int dirL, double dR, int dirR, boolean vC) {
     addRequirements(Robot.getRobotContainer().getDriveTrain());
      distanceL = dL;
      distanceR = dR;
      directionL = dirL;
      directionR = dirR;
+     velChange = vC;
 
       //Poner t como signo y que double t sea 1 o -1 para que actualDistance se pueda utilizar tanto al ir para enfrente como para atrás 
 
@@ -35,19 +40,29 @@ public class DriveDistance extends CommandBase {
   @Override
   public void execute() {
 
+
+
     double actualDistanceL =  (Robot.getRobotContainer().getDriveTrain().getDriveTrainFeetL());
     double actualDistanceR =  (Robot.getRobotContainer().getDriveTrain().getDriveTrainFeetR());
     double actualDistanceL2 =  (Robot.getRobotContainer().getDriveTrain().getDriveTrainFeetL2());
     double actualDistanceR2 =  (Robot.getRobotContainer().getDriveTrain().getDriveTrainFeetR2());
 
+    if (velChange = false)
+    {
+        speed = RobotMap.autonomusSpeed;
+    }
+
+    if (velChange = true)
+    {
+        speed = RobotMap.autonomusCharge;
+    }
+
     boolean a,b,c,d;
-      a = Robot.getRobotContainer().getDriveTrain().moveWithEncodersL(actualDistanceL, distanceL, directionL);
-      b = Robot.getRobotContainer().getDriveTrain().moveWithEncodersR(actualDistanceR, distanceR, directionR); 
-      c = Robot.getRobotContainer().getDriveTrain().moveWithEncodersL2(actualDistanceL2, distanceL, directionL);
-      d = Robot.getRobotContainer().getDriveTrain().moveWithEncodersR2(actualDistanceR2, distanceR, directionR);
+      a = Robot.getRobotContainer().getDriveTrain().moveWithEncodersL(actualDistanceL, distanceL, directionL, speed);
+      b = Robot.getRobotContainer().getDriveTrain().moveWithEncodersR(actualDistanceR, distanceR, directionR, speed); 
+      c = Robot.getRobotContainer().getDriveTrain().moveWithEncodersL2(actualDistanceL2, distanceL, directionL, speed);
+      d = Robot.getRobotContainer().getDriveTrain().moveWithEncodersR2(actualDistanceR2, distanceR, directionR, speed);
 
-
-   
 
     if (a && b && c && d){
       finished= true;
@@ -56,8 +71,8 @@ public class DriveDistance extends CommandBase {
       finished=false;
     }
     
+  
   }
-
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}

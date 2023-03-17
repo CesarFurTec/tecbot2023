@@ -130,7 +130,7 @@ public class driveTrain extends SubsystemBase {
 
 
 
-  public boolean moveWithEncodersL (double current, double max, double dir)
+  public boolean moveWithEncodersL (double current, double max, double dir, double speed)
   {
     double slowDown = Math.abs(1-(Math.abs(current/((max*2)+0.000001))));
     if(slowDown>1){slowDown=1;}
@@ -144,7 +144,7 @@ public class driveTrain extends SubsystemBase {
         return true;
       }else
       {
-        m1.set(-RobotMap.autonomusSpeed*slowDown);
+        m1.set(-speed*slowDown);
         return false;
       }
     }else if(dir == -1)
@@ -155,7 +155,7 @@ public class driveTrain extends SubsystemBase {
         return true; 
       }else
       {
-        m1.set(RobotMap.autonomusSpeed*slowDown);
+        m1.set(speed*slowDown);
         return false;
       }
     }
@@ -163,7 +163,7 @@ public class driveTrain extends SubsystemBase {
     return false;
   }
 
-  public boolean moveWithEncodersL2 (double current, double max, double dir)
+  public boolean moveWithEncodersL2 (double current, double max, double dir, double speed)
   {
     double slowDown = Math.abs(1-(Math.abs(current/((max*2)+0.000001))));
     if(slowDown>1){slowDown=1;}
@@ -180,7 +180,7 @@ public class driveTrain extends SubsystemBase {
       }else
       {
        
-        m2.set(-RobotMap.autonomusSpeed*slowDown); 
+        m2.set(-speed*slowDown); 
          
         return false;
       }
@@ -195,7 +195,7 @@ public class driveTrain extends SubsystemBase {
       }else
       {
         
-        m2.set(RobotMap.autonomusSpeed*slowDown); 
+        m2.set(speed*slowDown); 
         
         return false;
       }
@@ -204,7 +204,7 @@ public class driveTrain extends SubsystemBase {
     return false;
   }
 
-  public boolean moveWithEncodersR (double current, double max, double dir)
+  public boolean moveWithEncodersR (double current, double max, double dir, double speed)
   {
     
     double slowDown = Math.abs(1-(Math.abs(current/((max*2)+0.000001))));
@@ -219,7 +219,7 @@ public class driveTrain extends SubsystemBase {
         return true;
       }else
       {
-        m3.set(RobotMap.autonomusSpeed*slowDown);
+        m3.set(speed*slowDown);
         return false;
       }
     }else if(dir == -1)
@@ -230,7 +230,7 @@ public class driveTrain extends SubsystemBase {
         return true; 
       }else
       {
-        m3.set(-RobotMap.autonomusSpeed*slowDown);
+        m3.set(-speed*slowDown);
         return false;
       }
     }
@@ -238,7 +238,8 @@ public class driveTrain extends SubsystemBase {
     return false;
   }
 
-  public boolean moveWithEncodersR2 (double current, double max, double dir)
+  //public boolean moveWithEncodersR2 (double current, double max, double dir)
+  public boolean moveWithEncodersR2 (double current, double max, double dir, double speed)
   {
     double slowDown = Math.abs(1-(Math.abs(current/((max*2)+0.000001))));
     if(slowDown>1){slowDown=1;}
@@ -253,7 +254,8 @@ public class driveTrain extends SubsystemBase {
       }else
       {
 
-        m4.set(RobotMap.autonomusSpeed*slowDown); 
+        //m4.set(RobotMap.autonomusSpeed*slowDown); 
+        m4.set(speed*slowDown); 
 
         return false;
       }
@@ -267,7 +269,8 @@ public class driveTrain extends SubsystemBase {
       }else
       {
         
-        m4.set(-RobotMap.autonomusSpeed*slowDown); 
+        //m4.set(-RobotMap.autonomusSpeed*slowDown);
+        m4.set(-speed*slowDown); 
         return false;
       }
     }

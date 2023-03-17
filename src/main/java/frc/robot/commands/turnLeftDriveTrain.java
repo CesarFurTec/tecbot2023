@@ -7,12 +7,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.resources.TecbotConstants;
 
 public class turnLeftDriveTrain extends CommandBase {
   /** Creates a new trunLeft. */
   boolean finished = false;
   double distanceL, distanceR;
+  double speed;
+
 
   public turnLeftDriveTrain(double dis) {
     addRequirements(Robot.getRobotContainer().getDriveTrain());
@@ -35,12 +38,14 @@ public class turnLeftDriveTrain extends CommandBase {
     double actualDistanceR =  (Robot.getRobotContainer().getDriveTrain().getDriveTrainFeetR());
     double actualDistanceL2 =  (Robot.getRobotContainer().getDriveTrain().getDriveTrainFeetL2());
     double actualDistanceR2 =  (Robot.getRobotContainer().getDriveTrain().getDriveTrainFeetR2());
+    
+    speed = RobotMap.autonomusSpeed;
 
     boolean a,b,c,d;
-      a = Robot.getRobotContainer().getDriveTrain().moveWithEncodersL(actualDistanceL, distanceL, 1);
-      b = Robot.getRobotContainer().getDriveTrain().moveWithEncodersR(actualDistanceR, distanceR, 1); 
-      c = Robot.getRobotContainer().getDriveTrain().moveWithEncodersL2(actualDistanceL2, distanceL, 1);
-      d = Robot.getRobotContainer().getDriveTrain().moveWithEncodersR2(actualDistanceR2, distanceR, 1);
+      a = Robot.getRobotContainer().getDriveTrain().moveWithEncodersL(actualDistanceL, distanceL, 1, speed);
+      b = Robot.getRobotContainer().getDriveTrain().moveWithEncodersR(actualDistanceR, distanceR, 1,  speed); 
+      c = Robot.getRobotContainer().getDriveTrain().moveWithEncodersL2(actualDistanceL2, distanceL, 1,  speed);
+      d = Robot.getRobotContainer().getDriveTrain().moveWithEncodersR2(actualDistanceR2, distanceR, 1,  speed);
 
 
    

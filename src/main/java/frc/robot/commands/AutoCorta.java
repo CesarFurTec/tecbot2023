@@ -35,7 +35,12 @@ public class AutoCorta extends SequentialCommandGroup {
     new WaitCommand(0.5),
     new OnArmT(),  //baja brazo
     new WaitCommand(0.3),
-    new DriveDistance(18, -1, 18, -1),   //retrocede 18 pies
+    new DriveDistance(9, -1, 9, -1, false)  //retrocede 18 pies
+    
+    //vel=0.5, distance=9 == NICE
+
+
+    /*
     new WaitCommand(0.3),
 
     //new DriveDistance(-3.6, 1, 3.6, 1),
@@ -62,7 +67,7 @@ public class AutoCorta extends SequentialCommandGroup {
     new DriveDistance(13, -1, 13, -1),  //sube a charge station, es preferible subir y bajarnos del otro lado que  quedarnos a medias
     new WaitCommand(0.3)
 
-
+    */
     );
   }
 }

@@ -28,7 +28,11 @@ public static final double chassisSpeedL = 0.5;
 
 public static final double chassisSpeedR = 0.5;
 
-public static final double autonomusSpeed = 0.28; // no mover
+public static final double autonomusCharge = 0.6; // 
+
+public static final double autonomusSpeed = 0.5; // no mover
+
+// estaba en 0.28 -_-
 
 public static final double armSpeedB = 1;
 

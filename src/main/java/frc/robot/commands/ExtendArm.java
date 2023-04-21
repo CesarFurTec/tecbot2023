@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
 public class ExtendArm extends CommandBase {
+  boolean isSafetyOn = false;
   /** Creates a new ExtendArm. */
   public ExtendArm() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -21,7 +22,14 @@ public class ExtendArm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.getRobotContainer().getArm().extendArm();
+    isSafetyOn = Robot.getRobotContainer().getSafety();
+    if(isSafetyOn)
+    {
+
+    }else{
+      Robot.getRobotContainer().getArm().extendArm();
+    }
+    
   }
 
   // Called once the command ends or is interrupted.

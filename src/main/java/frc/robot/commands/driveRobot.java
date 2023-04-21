@@ -6,9 +6,11 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 
 public class driveRobot extends CommandBase {
+  boolean isSafetyOn = false;
    
   /** Creates a new driveRobot. */
   public driveRobot() {
@@ -22,7 +24,16 @@ public class driveRobot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.getRobotContainer().getDriveTrain().drive(Robot.getRobotContainer().getOI().getPilot().getLeftAxisX(true), Robot.getRobotContainer().getOI().getPilot().getLeftAxisY(true));
+    isSafetyOn = Robot.getRobotContainer().getSafety();
+    if(isSafetyOn)
+    {
+      Robot.getRobotContainer().getDriveTrain().drive(Robot.getRobotContainer().getOI().getPilot().getLeftAxisX(true) * RobotMap.childSafetySpeed, Robot.getRobotContainer().getOI().getPilot().getLeftAxisY(true)* RobotMap.childSafetySpeed);
+    }else
+    {
+      Robot.getRobotContainer().getDriveTrain().drive(Robot.getRobotContainer().getOI().getPilot().getLeftAxisX(true), Robot.getRobotContainer().getOI().getPilot().getLeftAxisY(true));
+    }
+    
+    
   }
 
   // Called once the command ends or is interrupted.

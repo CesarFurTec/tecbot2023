@@ -14,6 +14,7 @@ import frc.robot.commands.turnLeftDriveTrain;
 import frc.robot.commands.driveForwardDT;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.SafetySubSys;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.driveTrain;
 import frc.robot.subsystems.Camera;
@@ -31,6 +32,8 @@ public class RobotContainer {
   private Intake intake;
   public Arm arm;
   public Camera camera;
+  public boolean safety;
+  public SafetySubSys safetySubSys;
 
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
@@ -43,8 +46,25 @@ public class RobotContainer {
      intake = new Intake();
      arm = new Arm();
      camera = new Camera();
+     safety = false;
+     safetySubSys = new SafetySubSys();
   
      //configureButtonBindings();
+  }
+
+  public boolean getSafety()
+  {
+    return safety;
+  }
+
+  public void setSafety(boolean safetySetting)
+  {
+    safety = safetySetting;
+  }
+
+  public SafetySubSys getSafetySubSys()
+  {
+    return safetySubSys;
   }
 
   public driveTrain getDriveTrain() {

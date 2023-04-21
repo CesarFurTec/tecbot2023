@@ -22,6 +22,8 @@ import frc.robot.commands.OnArmT;
 import frc.robot.commands.ResetEncoder;
 import frc.robot.commands.ResetEncoderDt;
 import frc.robot.commands.RetractArm;
+import frc.robot.commands.SafetyOff;
+import frc.robot.commands.SafetyOn;
 
 /** Add your docs here. */
 public class OI {
@@ -39,19 +41,26 @@ public class OI {
    public void configureButtonBindings(){
       
 
-     Regina.whenPressed(TecbotController.ButtonType.A, new IntakeOn());   //este abre
+      Regina.whenPressed(TecbotController.ButtonType.A, new IntakeOn());   //este abre
       Regina.whenPressed(TecbotController.ButtonType.B, new IntakeOff());   // este cierra
-  // retrae
 
       Regina.whenPressed(TecbotController.ButtonType.LB, new ChangeToSpeed()); //Left Bumper
       Regina.whenPressed(TecbotController.ButtonType.RB, new ChangeToTorque()); //Right bumper
-      
-      
 
-      Mario.whenPressed(TecbotController.ButtonType.A, new OnArmT()); // x   ////  este baja
-      Mario.whenPressed(TecbotController.ButtonType.B, new OffArm());
-      Mario.whenPressed(TecbotController.ButtonType.X, new ExtendArm());   //extiende
-      Mario.whenPressed(TecbotController.ButtonType.Y, new RetractArm()); // o   //// este sube
+      Regina.whenPressed(TecbotController.ButtonType.X, new OnArmT()); // x   ////  este baja
+      Regina.whenPressed(TecbotController.ButtonType.Y, new OffArm());
+
+      Regina.whenPressed(TecbotController.ButtonType.START, new ExtendArm());   //extiende
+      Regina.whenPressed(TecbotController.ButtonType.BACK, new RetractArm()); // o   //// este sube
+
+      Mario.whenPressed(TecbotController.ButtonType.LB, new SafetyOff()); 
+      Mario.whenPressed(TecbotController.ButtonType.RB, new SafetyOff()); // extend regular speed
+
+      Mario.whenPressed(TecbotController.ButtonType.A, new SafetyOn()); //no extend lower speed
+      Mario.whenPressed(TecbotController.ButtonType.B, new SafetyOn());
+      Mario.whenPressed(TecbotController.ButtonType.X, new SafetyOn()); 
+      Mario.whenPressed(TecbotController.ButtonType.Y, new SafetyOn()); 
+
 
    }
 

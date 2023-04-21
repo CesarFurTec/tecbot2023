@@ -7,13 +7,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class RetractArm extends CommandBase {
-  boolean isSafetyOn = false;
-  /** Creates a new RetractArm. */
-  public RetractArm() {
-    
+public class SafetyOn extends CommandBase {
+  /** Creates a new SafetyOn. */
+  public SafetyOn() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.getRobotContainer().getArm());
+    addRequirements(Robot.getRobotContainer().getSafetySubSys());
   }
 
   // Called when the command is initially scheduled.
@@ -23,13 +21,7 @@ public class RetractArm extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    isSafetyOn = Robot.getRobotContainer().getSafety();
-    if(isSafetyOn)
-    {
-
-    }else{
-    Robot.getRobotContainer().getArm().retractArm();
-    }
+    Robot.getRobotContainer().getSafetySubSys().safetyOn();
   }
 
   // Called once the command ends or is interrupted.

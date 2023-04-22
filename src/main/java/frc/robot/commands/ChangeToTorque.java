@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
 public class ChangeToTorque extends CommandBase {
+  boolean isSafetyOn = false;
   /** Creates a new ChangeToTorque. */
   public ChangeToTorque() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -24,8 +25,15 @@ public class ChangeToTorque extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.getRobotContainer().getDriveTrain().drive(Robot.getRobotContainer().getOI().getPilot().getLeftAxisX(true), Robot.getRobotContainer().getOI().getPilot().getLeftAxisY(true));
+    isSafetyOn = Robot.getRobotContainer().getSafety();
+    if(isSafetyOn)
+    {
+
+    }else{
+      Robot.getRobotContainer().getDriveTrain().drive(Robot.getRobotContainer().getOI().getPilot().getLeftAxisX(true), Robot.getRobotContainer().getOI().getPilot().getLeftAxisY(true));
     Robot.driveRetake();
+    }
+    
   }
 
   // Called once the command ends or is interrupted.

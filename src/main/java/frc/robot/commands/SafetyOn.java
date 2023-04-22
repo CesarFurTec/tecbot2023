@@ -22,6 +22,7 @@ public class SafetyOn extends CommandBase {
   @Override
   public void execute() {
     Robot.getRobotContainer().getSafetySubSys().safetyOn();
+    Robot.getRobotContainer().getDriveTrain().changeToTorque();
   }
 
   // Called once the command ends or is interrupted.

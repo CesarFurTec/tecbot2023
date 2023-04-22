@@ -387,8 +387,11 @@ public class driveTrain extends SubsystemBase {
 
 
   public void drive(double x, double y){
-    Robot.getRobotContainer().getOI().getPilot().setOffset(RobotMap.OFFSET);
+    //Robot.getRobotContainer().getOI().getPilot().setOffset(RobotMap.OFFSET);
+    Robot.getRobotContainer().getOI().getPilot().setOffset(0);
+
     double newX = (x*0.8); //0.7
+
     double rightSpeed = (-newX - y);
     double leftSpeed = (-newX + y);
     double speedMultiplier = 1;

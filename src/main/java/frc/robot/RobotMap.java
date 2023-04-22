@@ -32,7 +32,7 @@ public static final double autonomusCharge = 0.6; //
 
 public static final double autonomusSpeed = 0.5; // no mover, estaba en 0.28 -_-
 
-public static final double childSafetySpeed = 0.2; // 
+public static final double childSafetySpeed = 0.18; // 
 
 public static final double armSpeedB = 1;
 

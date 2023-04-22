@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class driveRobot extends CommandBase {
@@ -25,12 +26,29 @@ public class driveRobot extends CommandBase {
   @Override
   public void execute() {
     isSafetyOn = Robot.getRobotContainer().getSafety();
+    SmartDashboard.putNumber("x pilot: ", Robot.getRobotContainer().getOI().getPilot().getLeftAxisX() );
+        SmartDashboard.putNumber("Y pilot: ", Robot.getRobotContainer().getOI().getPilot().getLeftAxisY() );
+        SmartDashboard.putNumber("x copilot: ", Robot.getRobotContainer().getOI().getCopilot().getLeftAxisX() );
+        SmartDashboard.putNumber("Y copilot: ", Robot.getRobotContainer().getOI().getCopilot().getLeftAxisY() );
     if(isSafetyOn)
     {
-      Robot.getRobotContainer().getDriveTrain().drive(Robot.getRobotContainer().getOI().getPilot().getLeftAxisX(true) * RobotMap.childSafetySpeed, Robot.getRobotContainer().getOI().getPilot().getLeftAxisY(true)* RobotMap.childSafetySpeed);
+      if(Robot.getRobotContainer().getOI().getPilot().getLeftAxisX() != 0 || Robot.getRobotContainer().getOI().getPilot().getLeftAxisY() != 0)
+      {
+        
+        Robot.getRobotContainer().getDriveTrain().drive(Robot.getRobotContainer().getOI().getPilot().getLeftAxisX() * RobotMap.childSafetySpeed, Robot.getRobotContainer().getOI().getPilot().getLeftAxisY()* RobotMap.childSafetySpeed);
+      }else {
+        Robot.getRobotContainer().getDriveTrain().drive(Robot.getRobotContainer().getOI().getCopilot().getLeftAxisX() * RobotMap.childSafetySpeed, Robot.getRobotContainer().getOI().getCopilot().getLeftAxisY()* RobotMap.childSafetySpeed);
+      }
+      
+      //
     }else
     {
-      Robot.getRobotContainer().getDriveTrain().drive(Robot.getRobotContainer().getOI().getPilot().getLeftAxisX(true), Robot.getRobotContainer().getOI().getPilot().getLeftAxisY(true));
+      if(Robot.getRobotContainer().getOI().getPilot().getLeftAxisX(true) != 0 || Robot.getRobotContainer().getOI().getPilot().getLeftAxisY(true) != 0)
+      {
+        Robot.getRobotContainer().getDriveTrain().drive(Robot.getRobotContainer().getOI().getPilot().getLeftAxisX(true) , Robot.getRobotContainer().getOI().getPilot().getLeftAxisY(true));
+      }else {
+        Robot.getRobotContainer().getDriveTrain().drive(Robot.getRobotContainer().getOI().getCopilot().getLeftAxisX(true) , Robot.getRobotContainer().getOI().getCopilot().getLeftAxisY(true));
+      }
     }
     
     

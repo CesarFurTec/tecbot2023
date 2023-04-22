@@ -47,6 +47,7 @@ public class RobotContainer {
      arm = new Arm();
      camera = new Camera();
      safety = false;
+     //safety = true;
      safetySubSys = new SafetySubSys();
   
      //configureButtonBindings();
@@ -55,6 +56,7 @@ public class RobotContainer {
   public boolean getSafety()
   {
     return safety;
+   //return true;
   }
 
   public void setSafety(boolean safetySetting)

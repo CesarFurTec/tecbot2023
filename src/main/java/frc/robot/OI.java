@@ -61,6 +61,9 @@ public class OI {
       Mario.whenPressed(TecbotController.ButtonType.X, new SafetyOn()); 
       Mario.whenPressed(TecbotController.ButtonType.Y, new SafetyOn()); 
 
+      Mario.whenPressed(TecbotController.ButtonType.START, new ExtendArm());   //extiende
+      Mario.whenPressed(TecbotController.ButtonType.BACK, new RetractArm()); // o   //// este sube
+
 
    }
 

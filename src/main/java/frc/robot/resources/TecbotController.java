@@ -378,7 +378,7 @@ public class TecbotController {
                 DriverStation.reportWarning("Could not get axis value from getRightAxisX(). Returned 0. Returned 0. Use getAxisValue() instead.", false);
                 break;
         }
-        return ground(value, offset);
+        return ground(value, getOffset());
     }
 
     /**
